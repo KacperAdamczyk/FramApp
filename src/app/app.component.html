@@ -3,7 +3,7 @@
     <div class="navbar-header"><h1><a href="#"> {{title}} </a></h1></div>
   </div>
   <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
-    <button type="button" class="btn btn-large pull-right pSignButton"></button>
+    <button type="button" class="btn btn-large pull-right pSignButton" appUserButton [userLoggedIn]="userLoggedIn" (click)="onUserButtonClick()"></button>
   </div>
 </nav>
 
@@ -20,7 +20,7 @@
       <div class="navbar-header">
         <h1>
           <a href="#"> {{title}} </a>
-          <button type="button" class="btn btn-large pull-right pSignButton pSignButtonMobile"></button>
+          <button type="button" class="btn btn-large pull-right pSignButton pSignButtonMobile" appUserButton [userLoggedIn]="userLoggedIn" (click)="onUserButtonClick()"></button>
         </h1>
       </div>
     </div>
@@ -30,7 +30,13 @@
 
       <ul class="nav navbar-nav navbar-right pMenuMobile">
         <li>
-          <ul class="pMenuCat">Categories</ul>
+          <ul class="pMenuCat" (click)="onCategoryClick($event)">Categories
+            <app-category-list></app-category-list>
+          </ul>
+          <ul class="pMenuAdmin" *ngIf="userLoggedIn"><span>Admin</span>
+            <li><a href="#">Products</a></li>
+            <li><a href="#">Categories</a></li>
+          </ul>
         </li>
       </ul>
     </div><!-- /.navbar-collapse -->
@@ -38,9 +44,18 @@
 </nav>
 
 <div class="col-lg-2 col-md-3 col-sm-4 pMenu">
-  <ul class="pMenuCat">Categories</ul>
+  <ul class="pMenuCat" (click)="onCategoryClick($event)">Categories
+    <app-category-list></app-category-list>
+  </ul>
+  <ul class="pMenuAdmin" *ngIf="userLoggedIn"><span>Admin</span>
+    <li><a href="#">Products</a></li>
+    <li><a href="#">Categories</a></li>
+  </ul>
 </div>
 
 <div class="col-lg-10 col-md-9 col-sm-8 col-xs-12 pContainer">
-
+  <app-product-list
+    *ngIf="categoryToDisplay"
+    [categoryToDisplay]="categoryToDisplay || (firstCategory | async)">Loading...
+  </app-product-list>
 </div>

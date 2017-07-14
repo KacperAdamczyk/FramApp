@@ -6,16 +6,28 @@ import { HttpModule, JsonpModule } from '@angular/http';
 
 import { AngularFireModule } from 'angularfire2';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
-import {AngularFireAuth, AngularFireAuthModule} from 'angularfire2/auth';
+import { AngularFireAuthModule} from 'angularfire2/auth';
 import { firebaseConfig } from './firebaseConfig';
 
 import { AppComponent } from './app.component';
 
 import { CategoryService } from './category.service';
+import { ProductService } from './product.service'
+
+import { CategoryListComponent } from './category-list/category-list.component';
+import { ProductListComponent } from './product-list/product-list.component';
+import { UserButtonDirective } from './user-button.directive';
+import { ProductImageDirective } from './product-list/product-image.directive';
+
+// import { ButtonsModule } from 'ngx-bootstrap';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    CategoryListComponent,
+    ProductListComponent,
+    UserButtonDirective,
+    ProductImageDirective
   ],
   imports: [
     BrowserModule,
@@ -23,9 +35,13 @@ import { CategoryService } from './category.service';
     JsonpModule,
     AngularFireModule.initializeApp(firebaseConfig),
     AngularFireDatabaseModule,
-    AngularFireAuthModule
+    AngularFireAuthModule,
+    // ButtonsModule.forRoot()
   ],
-  providers: [CategoryService],
+  providers: [
+    CategoryService,
+    ProductService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -7,33 +7,33 @@ import * as firebase from 'firebase/app';
 
 import { email, password } from './firebaseConfig'
 
-import { Category } from './category'
+import { Product } from './product'
 
 @Injectable()
-export class CategoryService {
+export class ProductService {
   user: Observable<firebase.User>;
-  items$: FirebaseListObservable<Category[]>;
+  items$: FirebaseListObservable<Product[]>;
 
   constructor(public afAuth: AngularFireAuth, public af: AngularFireDatabase) {
     this.login();
-    this.items$ = af.list('/categories');
+    this.items$ = af.list('/products');
     this.user = this.afAuth.authState;
   }
   login() {
     this.afAuth.auth.signInWithEmailAndPassword(email, password);
   }
-
   logout() {
     this.afAuth.auth.signOut();
   }
-  getCategories(): Observable<Category[]> {
-    return this.items$.map(categories =>
-      categories.map(category => new Category(category.$key, category.title, category.description)));
+  getProducts(category: String): Observable<Product[]> {
+    category = category.toLocaleLowerCase();
+    return this.items$.map(products => products
+      .filter(product => product.category === category)
+      .map(product => new Product(product.$key, product.id, product.title, product.description, product.category,
+          product.imgUrl, product.promoted, product.price, product.amount))
+    );
   }
-  addCategory(category: Category) {
-    this.items$.push(category);
-  }
-  getFirstCategory() {
-    return this.items$.map(categories => categories.filter((val, i) => i === 0).map(category => category.title));
+  addProduct(product: Product) {
+    this.items$.push(JSON.stringify(product));
   }
 }

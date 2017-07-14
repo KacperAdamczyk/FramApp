@@ -1,0 +1,44 @@
+.pAddForm{
+  margin: 50px 40px 0 50px;
+  max-width: 400px;
+
+  h2{
+    margin-bottom: 30px;
+  }
+
+  textarea{
+    min-height: 150px;
+  }
+  input[type]:focus,
+  textarea:focus,
+  textarea:active,
+  select:focus{
+    border-color: $blueColor !important;
+  }
+
+  .pInlineMargin{
+    margin-left: 26px;
+    @media only screen and (max-width: 767px) {
+      margin-left: 0;
+    }
+  }
+}
+.pSubmitButton{
+  width: 100px;
+  margin: 9px 15px 0 0;
+  background-color: $blueColor;
+  border: none;
+  color: $whiteFont;
+  &:hover{
+    background-color: darken($blueColor, 10%);
+    color: $whiteFont;
+  }
+  &:focus{
+    color: $whiteFont;
+  }
+  &:active{
+    color: $whiteFont;
+    outline: none;
+    box-shadow:none;
+  }
+}

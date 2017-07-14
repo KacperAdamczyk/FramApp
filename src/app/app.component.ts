@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component, OnDestroy} from '@angular/core';
 
 import { CategoryService } from './category.service';
 
@@ -9,10 +9,14 @@ import { Category } from './category';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent {
+export class AppComponent implements OnDestroy {
   title = 'app';
-  categories: any;
+  categories: Category[];
+  ngOnDestroy(): void {
+    throw new Error('Method not implemented.');
+  }
   constructor(private categoryService: CategoryService) {
-    this.categories = categoryService.getCategories();
+    categoryService.getCategories().subscribe(data => this.categories = data);
   }
 }
+

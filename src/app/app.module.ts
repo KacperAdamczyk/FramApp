@@ -1,3 +1,5 @@
+import './global-imports';
+
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpModule, JsonpModule } from '@angular/http';

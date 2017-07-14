@@ -12,12 +12,12 @@ import { Category } from './category'
 @Injectable()
 export class CategoryService {
   user: Observable<firebase.User>;
-  items: FirebaseListObservable<any[]>;
+  items$: FirebaseListObservable<Category[]>;
   msgVal = '';
 
   constructor(public afAuth: AngularFireAuth, public af: AngularFireDatabase) {
     this.login();
-    this.items = af.list('/categories');
+    this.items$ = af.list('/categories');
     this.user = this.afAuth.authState;
   }
   login() {
@@ -29,11 +29,13 @@ export class CategoryService {
   }
 
   createCategory(category: Category) {
-    this.items.push({ message: null});
+    this.items$.push({ message: null});
     this.msgVal = '';
   }
 
-  getCategories(): any {
-    return this.items;
+  getCategories(): Observable<Category[]> {
+    return this.items$.map(categories =>
+      categories.map(category =>
+        new Category(category.$key, category.title, category.description)));
   }
 }

@@ -10,7 +10,7 @@ import { Category } from './category';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnDestroy {
-  title = 'app';
+  title = 'FramApp';
   categories: Category[];
   ngOnDestroy(): void {
     throw new Error('Method not implemented.');

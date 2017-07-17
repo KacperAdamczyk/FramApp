@@ -1,0 +1,15 @@
+$img-width: 600px;
+
+p {
+  font-size: 30px;
+  font-weight: 500;
+}
+div {
+  width: $img-width;
+  margin: auto;
+  img {
+    margin: auto;
+    width: $img-width;
+  }
+}
+

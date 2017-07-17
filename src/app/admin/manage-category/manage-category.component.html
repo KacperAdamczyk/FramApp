@@ -1,0 +1,21 @@
+<a class="btn btn-large pAddButton">Add</a>
+<a class="btn btn-large pAddButton" (click)="onDeleteAll()">Delete All</a>
+<table id="pTable">
+  <thead>
+  <tr>
+    <th class="th1">ID</th>
+    <th class="th2">Category name</th>
+    <th class="th3">Actions</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let category of categories$ | async">
+    <td>{{category.id}}</td>
+    <td>{{category.title}}</td>
+    <td>
+      <a>Edit</a>/
+      <a (click)="onDelete(category.id)">Delete</a>
+    </td>
+  </tr>
+  </tbody>
+</table>

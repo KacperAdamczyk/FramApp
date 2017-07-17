@@ -52,8 +52,5 @@
 </div>
 
 <div class="col-lg-10 col-md-9 col-sm-8 col-xs-12 pContainer">
-  <app-product-list
-    *ngIf="categoryToDisplay"
-    [categoryToDisplay]="categoryToDisplay || (firstCategory | async)">Loading...
-  </app-product-list>
+  <router-outlet></router-outlet>
 </div>

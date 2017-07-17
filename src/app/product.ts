@@ -21,9 +21,9 @@ export class Product {
     this.amount = this.validateNumber(amount);
   }
   validateString(str: string): string {
-    return str ? str : '';
+    return str || '';
   }
   validateNumber(num: number): number {
-    return num < 0 ? 0 : num;
+    return num || 0;
   }
 }

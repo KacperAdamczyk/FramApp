@@ -1,30 +1,30 @@
-import { Component, OnInit, OnChanges, Input } from '@angular/core';
+import 'rxjs/add/operator/switchMap';
 
+import { Component, OnInit } from '@angular/core';
 import { ProductService } from '../product.service';
+//import { CategoryService } from '../category.service';
 
 import { Product } from '../product';
-import {Observable} from 'rxjs/Observable';
+
+import {ActivatedRoute, ParamMap, Router} from '@angular/router';
+import { Observable } from 'rxjs/Observable';
 
 @Component({
   selector: 'app-product-list',
   templateUrl: './product-list.component.html',
   styleUrls: ['./product-list.component.scss']
 })
-export class ProductListComponent implements OnInit, OnChanges {
-  @Input() categoryToDisplay = '';
+export class ProductListComponent implements OnInit {
   products$: Observable<Product[]>;
-  detailedProduct: Product = null;
-  constructor(private productService: ProductService) {
+  constructor(private route: ActivatedRoute,
+              //private categoryService: CategoryService,
+              private productService: ProductService) {
   }
   ngOnInit() {
-    this.products$ = this.productService.getProducts(this.categoryToDisplay);
-  }
-  ngOnChanges() {
-    this.products$ = this.productService.getProducts(this.categoryToDisplay);
-    this.detailedProduct = null;
-  }
-  showDetails(product: Product) {
-    console.log(product);
-    this.detailedProduct = product;
+    const paramName = 'category';
+    this.products$ = this.route.paramMap.switchMap((params: ParamMap) => {
+      const paramVal = params.get(paramName);
+      return this.productService.getProducts(paramVal); // : this.categoryService.getFirstCategory().map(category => this.productService.getProducts(category));
+    });
   }
 }

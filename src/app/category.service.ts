@@ -12,28 +12,33 @@ import { Category } from './category'
 @Injectable()
 export class CategoryService {
   user: Observable<firebase.User>;
-  items$: FirebaseListObservable<Category[]>;
+  categories$: FirebaseListObservable<Category[]>;
 
   constructor(public afAuth: AngularFireAuth, public af: AngularFireDatabase) {
     this.login();
-    this.items$ = af.list('/categories');
+    this.categories$ = af.list('/categories');
     this.user = this.afAuth.authState;
   }
   login() {
     this.afAuth.auth.signInWithEmailAndPassword(email, password);
   }
-
   logout() {
     this.afAuth.auth.signOut();
   }
   getCategories(): Observable<Category[]> {
-    return this.items$.map(categories =>
+    return this.categories$.map(categories =>
       categories.map(category => new Category(category.$key, category.title, category.description)));
   }
-  addCategory(category: Category) {
-    this.items$.push(category);
-  }
   getFirstCategory() {
-    return this.items$.map(categories => categories.filter((val, i) => i === 0).map(category => category.title));
+    return this.categories$.map(categories => categories.filter((val, i) => i === 0).map(category => category.title));
+  }
+  addCategory(category: Category) {
+    this.categories$.push(category);
+  }
+  deleteCategory(categoryId: string) {
+    this.categories$.remove(categoryId);
+  }
+  deleteAllCategories() {
+    this.categories$.remove();
   }
 }

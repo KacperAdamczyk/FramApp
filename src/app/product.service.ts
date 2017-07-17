@@ -12,11 +12,11 @@ import { Product } from './product'
 @Injectable()
 export class ProductService {
   user: Observable<firebase.User>;
-  items$: FirebaseListObservable<Product[]>;
+  products$: FirebaseListObservable<Product[]>;
 
   constructor(public afAuth: AngularFireAuth, public af: AngularFireDatabase) {
     this.login();
-    this.items$ = af.list('/products');
+    this.products$ = af.list('/products');
     this.user = this.afAuth.authState;
   }
   login() {
@@ -25,15 +25,26 @@ export class ProductService {
   logout() {
     this.afAuth.auth.signOut();
   }
-  getProducts(category: String): Observable<Product[]> {
+  getProducts(category: string = ''): Observable<Product[]> {
     category = category.toLocaleLowerCase();
-    return this.items$.map(products => products
-      .filter(product => product.category === category)
+    return this.products$.map(products => products
+      .filter(product => category ? product.category === category : true)
       .map(product => new Product(product.$key, product.id, product.title, product.description, product.category,
-          product.imgUrl, product.promoted, product.price, product.amount))
-    );
+          product.imgUrl, product.promoted, product.price, product.amount)));
+  }
+  getProduct(id: string) {
+    return this.products$.map(products => products
+      .filter(product => product.$key === id)
+      .map(product => new Product(product.$key, product.id, product.title, product.description, product.category,
+        product.imgUrl, product.promoted, product.price, product.amount)));
   }
   addProduct(product: Product) {
-    this.items$.push(JSON.stringify(product));
+    this.products$.push(JSON.stringify(product));
+  }
+  deleteProduct(productId: string) {
+    this.products$.remove(productId);
+  }
+  deleteAllProducts() {
+    this.products$.remove();
   }
 }

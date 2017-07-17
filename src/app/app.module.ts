@@ -17,7 +17,7 @@ import { ProductService } from './product.service'
 import { CategoryListComponent } from './category-list/category-list.component';
 import { ProductListComponent } from './product-list/product-list.component';
 import { UserButtonDirective } from './user-button.directive';
-import { ProductImageDirective } from './product-list/product-image.directive';
+import { ProductDetailsComponent } from './product-list/product-details/product-details.component';
 
 // import { ButtonsModule } from 'ngx-bootstrap';
 
@@ -27,7 +27,7 @@ import { ProductImageDirective } from './product-list/product-image.directive';
     CategoryListComponent,
     ProductListComponent,
     UserButtonDirective,
-    ProductImageDirective
+    ProductDetailsComponent
   ],
   imports: [
     BrowserModule,

@@ -12,4 +12,3 @@ export const firebaseConfig = {
   storageBucket: 'project-5613440220430148247.appspot.com',
   messagingSenderId: '122242095723'
 };
-

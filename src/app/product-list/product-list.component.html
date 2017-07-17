@@ -1,13 +1,19 @@
 <div *ngIf="!detailedProduct; else elseBlock">
-  <div class="pSquare" *ngFor="let product of products | async" (click)="showDetails(product)">
-    <div class="pDetailsButton">
-      <div class="pDetailsButtonText">Details</div>
+  <ng-container *ngIf="(products$ | async) as products">
+    <div class="pSquare" *ngFor="let product of products" (click)="showDetails(product)">
+      <div class="pDetailsButton">
+        <div class="pDetailsButtonText">Details</div>
+      </div>
+      <div class="pFavorited" *ngIf="product.promoted"></div>
+      <img class="pImage" [src]="product.imgUrl" [alt]="product.title">
+      <div class="pTitle">{{product.title}}</div>
     </div>
-    <div class="pFavorited" *ngIf="product.promoted"></div>
-    <div class="pImage" appProductImage [url]="product.imgUrl"></div>
-    <div class="pTitle">{{product.title}}</div>
-  </div>
+
+    <div *ngIf="!products || !products.length" class="pNoProducts">
+      <h3>Sorry, we don't have these products at this moment.</h3>
+    </div>
+  </ng-container>
+  <ng-template #elseBlock>
+    <app-product-details [product]="detailedProduct"></app-product-details>
+  </ng-template>
 </div>
-<ng-template #elseBlock>
-<app-product-details [product]="detailedProduct"></app-product-details>
-</ng-template>

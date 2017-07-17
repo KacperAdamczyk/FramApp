@@ -1,3 +1,5 @@
+@import '../../../shared/styles/variables';
+
 .pDetailsContainer{
   margin: 30px 30px 0 30px;
   h2{
@@ -6,4 +8,13 @@
   p{
     margin-top: 50px;
   }
+}
+.pImage{
+  height: 180px;
+  width: 100%;
+  background-color: $blackColor;
+  background-position: top center;
+  -webkit-background-size: cover;
+  background-size: cover;
+  position: relative;
 }

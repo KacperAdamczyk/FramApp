@@ -11,19 +11,15 @@ import {Observable} from 'rxjs/Observable';
 export class AppComponent implements OnDestroy {
   title = 'FramApp';
   userLoggedIn = false;
-  userStatus = 'user';
   categoryToDisplay = '';
   firstCategory: Observable<any>;
+  userLoggedInLabel = 'Log Out';
+  userLoggedOutLabel = 'Log In';
   ngOnDestroy(): void {
     throw new Error('Method not implemented.');
   }
   constructor(private categoryService: CategoryService) {
     this.firstCategory = categoryService.getFirstCategory();
-
-    if (!window.sessionStorage.getItem(this.userStatus)) {
-      window.sessionStorage.setItem(this.userStatus, this.userLoggedIn ? 'true' : 'false');
-    }
-    this.userLoggedIn = window.sessionStorage.getItem(this.userStatus) === 'true';
   }
   onUserButtonClick() {
     this.userLoggedIn = !this.userLoggedIn;

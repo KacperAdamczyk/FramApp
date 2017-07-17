@@ -3,7 +3,7 @@
     <div class="navbar-header"><h1><a href="#"> {{title}} </a></h1></div>
   </div>
   <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
-    <button type="button" class="btn btn-large pull-right pSignButton" appUserButton [userLoggedIn]="userLoggedIn" (click)="onUserButtonClick()"></button>
+    <button type="button" class="btn btn-large pull-right pSignButton" (click)="onUserButtonClick()">{{userLoggedIn? userLoggedInLabel : userLoggedOutLabel}}</button>
   </div>
 </nav>
 
@@ -20,7 +20,7 @@
       <div class="navbar-header">
         <h1>
           <a href="#"> {{title}} </a>
-          <button type="button" class="btn btn-large pull-right pSignButton pSignButtonMobile" appUserButton [userLoggedIn]="userLoggedIn" (click)="onUserButtonClick()"></button>
+          <button type="button" class="btn btn-large pull-right pSignButton pSignButtonMobile" (click)="onUserButtonClick()">{{userLoggedIn? userLoggedInLabel : userLoggedOutLabel}}</button>
         </h1>
       </div>
     </div>
@@ -33,10 +33,9 @@
           <ul class="pMenuCat" (click)="onCategoryClick($event)">Categories
             <app-category-list></app-category-list>
           </ul>
-          <ul class="pMenuAdmin" *ngIf="userLoggedIn"><span>Admin</span>
-            <li><a href="#">Products</a></li>
-            <li><a href="#">Categories</a></li>
-          </ul>
+          <ng-container *ngIf="userLoggedIn">
+            <app-admin-panel></app-admin-panel>
+          </ng-container>
         </li>
       </ul>
     </div><!-- /.navbar-collapse -->
@@ -47,10 +46,9 @@
   <ul class="pMenuCat" (click)="onCategoryClick($event)">Categories
     <app-category-list></app-category-list>
   </ul>
-  <ul class="pMenuAdmin" *ngIf="userLoggedIn"><span>Admin</span>
-    <li><a href="#">Products</a></li>
-    <li><a href="#">Categories</a></li>
-  </ul>
+  <ng-container *ngIf="userLoggedIn">
+    <app-admin-panel></app-admin-panel>
+  </ng-container>
 </div>
 
 <div class="col-lg-10 col-md-9 col-sm-8 col-xs-12 pContainer">

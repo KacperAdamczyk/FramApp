@@ -12,15 +12,15 @@ import {Observable} from 'rxjs/Observable';
 })
 export class ProductListComponent implements OnInit, OnChanges {
   @Input() categoryToDisplay = '';
-  products: Observable<Product[]>;
+  products$: Observable<Product[]>;
   detailedProduct: Product = null;
   constructor(private productService: ProductService) {
   }
   ngOnInit() {
-    this.products = this.productService.getProducts(this.categoryToDisplay);
+    this.products$ = this.productService.getProducts(this.categoryToDisplay);
   }
   ngOnChanges() {
-    this.products = this.productService.getProducts(this.categoryToDisplay);
+    this.products$ = this.productService.getProducts(this.categoryToDisplay);
     this.detailedProduct = null;
   }
   showDetails(product: Product) {

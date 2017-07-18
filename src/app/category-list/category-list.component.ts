@@ -10,12 +10,12 @@ import {Observable} from 'rxjs/Observable';
   styleUrls: ['./category-list.component.scss']
 })
 export class CategoryListComponent implements OnInit {
-  categories: Observable<Category[]>;
+  categories$: Observable<Category[]>;
   constructor(private categoryService: CategoryService) {
   }
 
   ngOnInit() {
-    this.categories = this.categoryService.getCategories();
+    this.categories$ = this.categoryService.getCategories();
   }
 
 }

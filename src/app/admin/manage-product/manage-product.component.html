@@ -1,4 +1,4 @@
-<a id="pAdd" href="#" class="btn btn-large pAddButton" >Add</a>
+<a id="pAdd" class="btn btn-large pAddButton" routerLink="/admin/product">Add</a>
 <a class="btn btn-large pAddButton" (click)="onDeleteAll()">Delete All</a>
 <table id="pTable">
   <thead>
@@ -9,11 +9,11 @@
   </tr>
   </thead>
   <tbody>
-  <tr *ngFor="let product of products$ | async">
-    <td>{{product.id}}</td>
+  <tr *ngFor="let product of products$ | async; let i = index">
+    <td>{{i}}</td>
     <td>{{product.title}}</td>
     <td>
-      <a>Edit</a>/
+      <a routerLink="/admin/product/{{product.id_real}}">Edit</a>/
       <a (click)="onDelete(product.id_real)">Delete</a>
     </td>
   </tr>

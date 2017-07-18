@@ -1,4 +1,4 @@
-<a class="btn btn-large pAddButton">Add</a>
+<a class="btn btn-large pAddButton" routerLink="/admin/category">Add</a>
 <a class="btn btn-large pAddButton" (click)="onDeleteAll()">Delete All</a>
 <table id="pTable">
   <thead>
@@ -9,11 +9,11 @@
   </tr>
   </thead>
   <tbody>
-  <tr *ngFor="let category of categories$ | async">
-    <td>{{category.id}}</td>
+  <tr *ngFor="let category of categories$ | async; let i = index">
+    <td>{{i}}</td>
     <td>{{category.title}}</td>
     <td>
-      <a>Edit</a>/
+      <a routerLink="/admin/category/{{category.id}}" routerLinkActive="active">Edit</a>/
       <a (click)="onDelete(category.id)">Delete</a>
     </td>
   </tr>

@@ -25,6 +25,11 @@ export class CategoryService {
   logout() {
     this.afAuth.auth.signOut();
   }
+  getCategory(id: string) {
+    return this.categories$.map(categories => categories
+      .filter(category => category.$key === id)
+      .map(category => new Category(category.$key, category.title, category.description)));
+  }
   getCategories(): Observable<Category[]> {
     return this.categories$.map(categories =>
       categories.map(category => new Category(category.$key, category.title, category.description)));
@@ -35,7 +40,11 @@ export class CategoryService {
   addCategory(category: Category) {
     this.categories$.push(category);
   }
+  editCategory(category: Category) {
+    this.categories$.update(category.id, category);
+  }
   deleteCategory(categoryId: string) {
+    if (!categoryId) { return; }
     this.categories$.remove(categoryId);
   }
   deleteAllCategories() {

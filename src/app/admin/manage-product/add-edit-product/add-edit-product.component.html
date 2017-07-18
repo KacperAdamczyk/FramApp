@@ -5,6 +5,11 @@
     </header>
 
     <div class="form-group">
+      <label for="pId" >Last Id:</label><br />
+      <input id="pId" class="form-control" name="Id" [(ngModel)]="product[0].id" [value]="(lastProductId$ | async) + 1"/>
+    </div>
+
+    <div class="form-group">
       <label for="pProduct" >Title:</label><br />
       <input id="pProduct" class="form-control" name="Products" [(ngModel)]="product[0].title"/>
     </div>
@@ -28,7 +33,7 @@
 
     <div class="form-group">
       <label for="pImg">Img URL:</label><br />
-      <input type="url" id="pImg" class="form-control" name="Img" value="https://unsplash.it/320/180/?random&id={{product[0].id}}" [(ngModel)]="product[0].imgUrl"/>
+      <input type="url" id="pImg" class="form-control" name="Img" value="https://unsplash.it/320/180/?random&id={{(lastProductId$ | async) + 1}}" [(ngModel)]="product[0].imgUrl"/>
     </div>
 
     <div class="form-group">

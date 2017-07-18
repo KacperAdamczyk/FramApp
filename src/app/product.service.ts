@@ -29,7 +29,7 @@ export class ProductService {
     this.afAuth.auth.signOut();
   }
   getProducts(category: string = ''): Observable<Product[]> {
-    // category = category ? category.toLocaleLowerCase() : ''; There's no need for letter case normalization
+    // category = category ? category.toLocaleLowerCase() : ''; /* There's no need for letter case normalization */
     return this.products$.map(products => products
       .filter(product => category ? product.category === category : true)
       .map(product => new Product(product.$key, product.id, product.title, product.description, product.category,
@@ -42,7 +42,19 @@ export class ProductService {
         product.imgUrl, product.promoted, product.price, product.amount)
       )).first();
   }
+  getLastProductId() {
+    return this.products$.map(products => {
+      let maxId = 0;
+      products.map(product => {
+        console.log( product);
+        maxId = product.id > maxId ? product.id : maxId;
+      });
+      return maxId;
+    });
+  }
   addProduct(product: Product) {
+    console.log(product);
+    delete product.id_real;
     this.products$.push(product);
   }
   editProduct(product: Product) {

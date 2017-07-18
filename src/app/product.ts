@@ -9,14 +9,14 @@ export class Product {
   price: number;
   amount: number;
   constructor(id_real = '',
-              id = null,
+              id = 0,
               title = '',
               description = '',
               category = '',
-              imgUrl = `https://unsplash.it/320/180/?random&id=${id}`,
+              imgUrl = '',
               promoted = false,
-              price = null,
-              amount = null) {
+              price = 0,
+              amount = 0) {
     this.id_real = id_real;
     this.id = id;
     this.title = title;

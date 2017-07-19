@@ -46,15 +46,12 @@ export class ProductService {
     return this.products$.map(products => {
       let maxId = -1;
       products.map(product => {
-        console.log('ProductID:');
-         console.log(product);
         maxId = product.id > maxId ? product.id : maxId;
       });
       return maxId;
     });
   }
   addProduct(product: Product) {
-    console.log(product);
     delete product.id_real;
     this.products$.push(product);
   }

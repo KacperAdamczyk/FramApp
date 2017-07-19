@@ -17,7 +17,6 @@ import { Subscription } from 'rxjs/Subscription';
 export class AddEditProductComponent implements OnInit, OnDestroy {
   product$: Observable<Product>;
   lastProductIdSubscription$: Subscription;
-  lastProductId = -1;
   product: Product;
   categories$: Observable<Category[]>;
   constructor(private route: ActivatedRoute,
@@ -29,7 +28,6 @@ export class AddEditProductComponent implements OnInit, OnDestroy {
     this.product$ = this.route.paramMap.switchMap((params: ParamMap) => {
       const paramName = 'id';
       const id = params.get(paramName);
-      console.log(id);
       return id ? this.productService.getProduct(id) : new Observable(subscriber => {
         this.product = new Product();
         subscriber.next([this.product]);
@@ -37,10 +35,10 @@ export class AddEditProductComponent implements OnInit, OnDestroy {
     });
     this.categories$ = this.categoryService.getCategories();
     this.lastProductIdSubscription$ = this.productService.getLastProductId().subscribe(productId => {
-      this.lastProductId = productId + 1;
+      const lastProductId = productId + 1;
       if (this.product) {
-        this.product.id = this.lastProductId;
-        this.product.imgUrl = `https://unsplash.it/320/180/?random&id=${this.lastProductId}`;
+        this.product.id = lastProductId;
+        this.product.imgUrl = `https://unsplash.it/320/180/?random&id=${lastProductId}`;
       }
     })
   }

@@ -1,5 +1,5 @@
 <ng-container *ngIf="(product$ | async) as product">
-  <form class="pAddForm" #productForm="ngForm">
+  <form class="pAppForm" #productForm="ngForm">
     <header>
       <h2>{{product[0].id ? 'Edit ' + product[0].title : 'Add product'}}</h2>
     </header>

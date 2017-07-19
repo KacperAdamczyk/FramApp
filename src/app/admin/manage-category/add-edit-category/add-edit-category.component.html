@@ -1,8 +1,7 @@
 <ng-container *ngIf="(category$ | async) as category">
-  <h2>{{category[0].id ? 'Edit ' + category[0].title : 'Add category'}}</h2>
-  <form class="pEditForm" #categoryForm="ngForm">
+  <form class="pAppForm" #categoryForm="ngForm">
     <header>
-      <h2></h2>
+      <h2>{{category[0].id ? 'Edit ' + category[0].title : 'Add category'}}</h2>
     </header>
     <div class="form-group">
       <label for="pProduct" >Name:</label><br />

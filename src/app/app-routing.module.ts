@@ -1,17 +1,16 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-import { ProductListComponent } from './product-list/product-list.component';
-import { AppComponent } from './app.component'
+import { PageNotFoundComponent } from './page-not-found/page-not-found.component'
 
 const appRoutes: Routes = [
-  { path: 'products$', component: ProductListComponent },
-  { path: '**', component: AppComponent }
+  { path: '', redirectTo: 'products', pathMatch: 'full' },
+  { path: '**', component: PageNotFoundComponent }
 ];
 
 @NgModule({
   imports: [
-    RouterModule.forRoot(appRoutes, { enableTracing: true } )
+    RouterModule.forRoot(appRoutes, { enableTracing: true } ),
   ],
   exports: [ RouterModule ]
 })

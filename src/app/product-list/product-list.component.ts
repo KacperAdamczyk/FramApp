@@ -1,30 +1,41 @@
-import { Component, OnInit, OnChanges, Input } from '@angular/core';
+import 'rxjs/add/operator/switchMap';
+import 'rxjs/add/operator/filter';
 
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ProductService } from '../product.service';
+import { CategoryService } from '../category.service';
 
 import { Product } from '../product';
-import {Observable} from 'rxjs/Observable';
+
+import {ActivatedRoute, ParamMap, Router} from '@angular/router';
+import { Observable } from 'rxjs/Observable';
+import { Subscription } from 'rxjs/Subscription'
 
 @Component({
   selector: 'app-product-list',
   templateUrl: './product-list.component.html',
   styleUrls: ['./product-list.component.scss']
 })
-export class ProductListComponent implements OnInit, OnChanges {
-  @Input() categoryToDisplay = '';
+export class ProductListComponent implements OnInit, OnDestroy {
   products$: Observable<Product[]>;
-  detailedProduct: Product = null;
-  constructor(private productService: ProductService) {
+  categoryNameSubscription$: Subscription;
+  constructor(private route: ActivatedRoute,
+              private router: Router,
+              private categoryService: CategoryService,
+              private productService: ProductService) {
   }
   ngOnInit() {
-    this.products$ = this.productService.getProducts(this.categoryToDisplay);
+    const categoryName$ = this.route.paramMap.map((params: ParamMap) => params.get('category'));
+
+    this.categoryNameSubscription$ = categoryName$
+      .filter(name => !name)
+      .switchMap(() => this.categoryService.getFirstCategory())
+      .subscribe(category => this.router.navigateByUrl(`products/${category}`));
+
+    this.products$ = categoryName$
+      .switchMap(name => this.productService.getProducts(name));
   }
-  ngOnChanges() {
-    this.products$ = this.productService.getProducts(this.categoryToDisplay);
-    this.detailedProduct = null;
-  }
-  showDetails(product: Product) {
-    console.log(product);
-    this.detailedProduct = product;
+  ngOnDestroy() {
+    this.categoryNameSubscription$.unsubscribe();
   }
 }

@@ -1,0 +1,50 @@
+<ng-container *ngIf="(product$ | async) as product">
+  <form class="pAddForm" #productForm="ngForm">
+    <header>
+      <h2>{{product[0].id ? 'Edit ' + product[0].title : 'Add product'}}</h2>
+    </header>
+
+    <div class="form-group">
+      <label for="pProduct" >Title:</label><br />
+      <input id="pProduct" class="form-control" name="Products" [(ngModel)]="product[0].title"/>
+    </div>
+
+    <label for="pPromoted" >Promoted:</label>
+    <input type="checkbox" id="pPromoted" name="Promoted" [(ngModel)]="product[0].promoted"/>
+    <br />
+    <br />
+    <div class="form-inline">
+      <div class="form-group">
+        <label for="pPrice" >Price:</label><br />
+        <input type="number" id="pPrice" class="form-control" name="Price" min="0" step="10" [(ngModel)]="product[0].price"/>
+      </div>
+
+      <div class="form-group pInlineMargin">
+        <label for="pAmount" >Amount:</label><br />
+        <input type="number" id="pAmount" class="form-control" name="Amount" min="0" [(ngModel)]="product[0].amount"/>
+      </div>
+    </div>
+    <br />
+
+    <div class="form-group">
+      <label for="pImg">Img URL:</label><br />
+      <input type="url" id="pImg" class="form-control" name="Img" value="https://unsplash.it/320/180/?random&id={{product[0].id}}" [(ngModel)]="product[0].imgUrl"/>
+    </div>
+
+    <div class="form-group">
+      <label for="pCategoryOption">Category:</label><br />
+      <select class="form-control" id="pCategoryOption" name="category" [(ngModel)]="product[0].category">
+      <option *ngFor="let category of categories$ | async" [ngValue]="category.title" [selected]="product[0].category === category.title">{{category.title}}</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label for="pProductDesc">Description:</label><br />
+      <textarea id="pProductDesc" name="ProductDescription" class="form-control" placeholder="Type some text..." [(ngModel)]="product[0].description"></textarea>
+    </div>
+
+    <button class="btn btn-large pSubmitButton" (click)="product[0].id_real ? onEdit(product[0]) : onAdd(product[0])">Save</button>
+    <button class="btn btn-large pSubmitButton" (click)="onDelete(product[0].id_real)">Delete</button>
+
+  </form>
+</ng-container>

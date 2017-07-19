@@ -1,0 +1,21 @@
+<a id="pAdd" class="btn btn-large pAddButton" routerLink="/admin/product">Add</a>
+<a class="btn btn-large pAddButton" (click)="onDeleteAll()">Delete All</a>
+<table id="pTable">
+  <thead>
+  <tr>
+    <th class="th1">ID</th>
+    <th class="th2">Product name</th>
+    <th class="th3">Actions</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let product of products$ | async; let i = index">
+    <td>{{i}}</td>
+    <td>{{product.title}}</td>
+    <td>
+      <a routerLink="/admin/product/{{product.id_real}}">Edit</a>/
+      <a (click)="onDelete(product.id_real)">Delete</a>
+    </td>
+  </tr>
+  </tbody>
+</table>

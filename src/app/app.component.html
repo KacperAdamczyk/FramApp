@@ -1,6 +1,6 @@
 <nav class="navbar pNav hideOnMobile">
   <div class="col-lg-10 col-md-10 col-sm-10 col-xs-10">
-    <div class="navbar-header"><h1><a href="#"> {{title}} </a></h1></div>
+    <div class="navbar-header"><h1><a routerLink="/"> {{title}} </a></h1></div>
   </div>
   <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
     <button type="button" class="btn btn-large pull-right pSignButton" (click)="onUserButtonClick()">{{userLoggedIn? userLoggedInLabel : userLoggedOutLabel}}</button>
@@ -30,7 +30,7 @@
 
       <ul class="nav navbar-nav navbar-right pMenuMobile">
         <li>
-          <ul class="pMenuCat" (click)="onCategoryClick($event)">Categories
+          <ul class="pMenuCat">Categories
             <app-category-list></app-category-list>
           </ul>
           <ng-container *ngIf="userLoggedIn">
@@ -43,11 +43,8 @@
 </nav>
 
 <div class="col-lg-2 col-md-3 col-sm-4 pMenu">
-  <ul class="pMenuCat" (click)="onCategoryClick($event)">Categories
+  <ul class="pMenuCat">Categories
     <app-category-list></app-category-list>
-  </ul>
-  <ul class="pMenuCat" (click)="onCategoryClick($event)">Pokemons
-    <app-testing-panel></app-testing-panel>
   </ul>
   <ng-container *ngIf="userLoggedIn">
     <app-admin-panel></app-admin-panel>
@@ -55,9 +52,5 @@
 </div>
 
 <div class="col-lg-10 col-md-9 col-sm-8 col-xs-12 pContainer">
-  <app-product-list
-    *ngIf="categoryToDisplay"
-    [categoryToDisplay]="categoryToDisplay || (firstCategory | async)">Loading...
-  </app-product-list>
-  <app-testing-panel-container></app-testing-panel-container>
+  <router-outlet></router-outlet>
 </div>

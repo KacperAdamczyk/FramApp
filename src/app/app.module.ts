@@ -9,26 +9,24 @@ import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { AngularFireAuthModule} from 'angularfire2/auth';
 import { firebaseConfig } from './firebaseConfig';
 
-import { AppComponent } from './app.component';
+import { ProductModule } from './product-list/product.module';
+import { AdminModule } from './admin/admin.module';
 import { AppRoutingModule } from './app-routing.module'
 
 import { CategoryService } from './category.service';
 import { ProductService } from './product.service'
 
+import { AppComponent } from './app.component';
 import { CategoryListComponent } from './category-list/category-list.component';
-import { ProductListComponent } from './product-list/product-list.component';
-import { ProductDetailsComponent } from './product-list/product-details/product-details.component';
 import { AdminPanelComponent } from './admin-panel/admin-panel.component';
-
-// import { ButtonsModule } from 'ngx-bootstrap';
+import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     CategoryListComponent,
-    ProductListComponent,
-    ProductDetailsComponent,
     AdminPanelComponent,
+    PageNotFoundComponent
   ],
   imports: [
     BrowserModule,
@@ -37,13 +35,14 @@ import { AdminPanelComponent } from './admin-panel/admin-panel.component';
     AngularFireModule.initializeApp(firebaseConfig),
     AngularFireDatabaseModule,
     AngularFireAuthModule,
+    ProductModule,
+    AdminModule,
     AppRoutingModule
-    // ButtonsModule.forRoot()
   ],
-  providers: [
+providers: [
     CategoryService,
     ProductService
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [ AppComponent ]
 })
 export class AppModule { }

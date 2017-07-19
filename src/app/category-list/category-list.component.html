@@ -1,1 +1,1 @@
-<li *ngFor="let category of categories$ | async"><a>{{category.title}}</a></li>
+<li *ngFor="let category of categories$ | async"><a routerLink="/products/{{category.title}}" routerLinkActive="active">{{category.title}}</a></li>

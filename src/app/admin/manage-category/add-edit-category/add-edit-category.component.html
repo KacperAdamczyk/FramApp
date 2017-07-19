@@ -1,0 +1,20 @@
+<ng-container *ngIf="(category$ | async) as category">
+  <h2>{{category[0].id ? 'Edit ' + category[0].title : 'Add category'}}</h2>
+  <form class="pEditForm" #categoryForm="ngForm">
+    <header>
+      <h2></h2>
+    </header>
+    <div class="form-group">
+      <label for="pProduct" >Name:</label><br />
+      <input id="pProduct" class="form-control" [(ngModel)]="category[0].title" name="title"/>
+    </div>
+
+    <div class="form-group">
+      <label for="pProductDesc">Description:</label><br />
+      <textarea id="pProductDesc" name="ProductDescription" class="form-control" placeholder="Type some text..." [(ngModel)]="category[0].description"></textarea>
+    </div>
+
+    <button class="btn btn-large pSubmitButton" (click)="category[0].id ? onEdit(category[0]) : onAdd(category[0])">Save</button>
+    <button class="btn btn-large pSubmitButton" (click)="onDelete(category[0].id)">Delete</button>
+  </form>
+</ng-container>

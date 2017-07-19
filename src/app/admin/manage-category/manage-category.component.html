@@ -1,0 +1,21 @@
+<a class="btn btn-large pAddButton" routerLink="/admin/category">Add</a>
+<a class="btn btn-large pAddButton pDelButton" (click)="onDeleteAll()">Delete All</a>
+<table id="pTable">
+  <thead>
+  <tr>
+    <th class="th1">ID</th>
+    <th class="th2">Category name</th>
+    <th class="th3">Actions</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let category of categories$ | async; let i = index">
+    <td>{{i}}</td>
+    <td>{{category.title}}</td>
+    <td>
+      <a routerLink="/admin/category/{{category.id}}" routerLinkActive="active">Edit</a>/
+      <a (click)="onDelete(category.id)">Delete</a>
+    </td>
+  </tr>
+  </tbody>
+</table>

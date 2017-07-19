@@ -26,22 +26,26 @@ export class CategoryService {
     this.afAuth.auth.signOut();
   }
   getCategory(id: string) {
-    return this.categories$.map(categories => categories
-      .filter(category => category.$key === id)
-      .map(category => new Category(category.$key, category.title, category.description)));
+    return this.categories$.map(categories => {
+      const category = categories.find(c => c.$key === id);
+      return new Category(category.$key, category.title, category.description);
+    })
   }
   getCategories(): Observable<Category[]> {
     return this.categories$.map(categories =>
       categories.map(category => new Category(category.$key, category.title, category.description)));
   }
   getFirstCategory() {
-    return this.categories$.map(categories => categories.filter((val, i) => i === 0).map(category => category.title));
+    return this.categories$.map(categories => categories[0].title);
   }
   addCategory(category: Category) {
+    delete category.id;
     this.categories$.push(category);
   }
   editCategory(category: Category) {
-    this.categories$.update(category.id, category);
+    const categoryId = category.id;
+    delete category.id;
+    this.categories$.update(categoryId, category);
   }
   deleteCategory(categoryId: string) {
     if (!categoryId) { return; }

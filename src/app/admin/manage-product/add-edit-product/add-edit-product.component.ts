@@ -4,7 +4,7 @@ import {ActivatedRoute, ParamMap, Router} from '@angular/router';
 import { ProductService } from '../../../product.service';
 import { CategoryService } from '../../../category.service';
 
-import {Observable} from 'rxjs/Observable';
+import { Observable } from 'rxjs/Observable';
 import { Product } from '../../../product';
 import { Category } from '../../../category';
 import { Subscription } from 'rxjs/Subscription';
@@ -30,7 +30,7 @@ export class AddEditProductComponent implements OnInit, OnDestroy {
       const id = params.get(paramName);
       return id ? this.productService.getProduct(id) : new Observable(subscriber => {
         this.product = new Product();
-        subscriber.next([this.product]);
+        subscriber.next(this.product);
       });
     });
     this.categories$ = this.categoryService.getCategories();

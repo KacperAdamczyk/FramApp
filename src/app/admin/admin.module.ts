@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms'
+import { FormsModule, ReactiveFormsModule } from '@angular/forms'
 
 import { CategoryService } from '../category.service';
 import { ProductService } from '../product.service';
@@ -10,12 +10,15 @@ import { ManageProductComponent } from './manage-product/manage-product.componen
 import { AddEditCategoryComponent } from './manage-category/add-edit-category/add-edit-category.component';
 import { AddEditProductComponent } from './manage-product/add-edit-product/add-edit-product.component';
 
+import { AdminAuthGuard } from '../admin-auth.guard';
+
 import { AdminRoutingModule } from './admin-routing.module';
 
 @NgModule({
   imports: [
     CommonModule,
-    FormsModule,
+    FormsModule, // TODO switch completely to reactive forms
+    ReactiveFormsModule,
     AdminRoutingModule
   ],
   declarations: [
@@ -26,7 +29,8 @@ import { AdminRoutingModule } from './admin-routing.module';
   ],
   providers: [
     CategoryService,
-    ProductService
+    ProductService,
+    AdminAuthGuard
   ]
 })
 export class AdminModule { }

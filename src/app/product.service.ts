@@ -36,11 +36,12 @@ export class ProductService {
           product.imgUrl, product.promoted, product.price, product.amount)));
   }
   getProduct(id: string): Observable<Product> {
-    return this.products$.map(products => products
-      .filter(product => product.$key === id)
-      .map(product => new Product(product.$key, product.id, product.title, product.description, product.category,
-        product.imgUrl, product.promoted, product.price, product.amount)
-      )).first();
+    return this.products$.map(products => {
+      const product = products.find(p => p.$key === id);
+      return new Product(
+        product.$key, product.id, product.title, product.description, product.category,
+        product.imgUrl, product.promoted, product.price, product.amount);
+    });
   }
   getLastProductId() {
     return this.products$.map(products => {

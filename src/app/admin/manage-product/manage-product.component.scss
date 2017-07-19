@@ -32,7 +32,6 @@ table{
   text-align: center;
   @include tableBorder($borderColor);
 }
-
 th{
   color: $whiteFont;
   background-color: $blackColor;
@@ -48,7 +47,6 @@ th{
 .th3 {
   max-width: 250px;
 }
-
 tr:nth-child(even) {
   background: lighten($blackColor,62%);
 }
@@ -70,6 +68,29 @@ td{
     cursor: pointer;
     &:hover{
       color: darken($blueColor, 10%);
+    }
+  }
+}
+
+//---------- Mobile ----------
+
+@media only screen and (max-width: 767px) {
+  table {
+    margin-left: 0px;
+    margin-right: 0px;
+    width: 100%;
+  }
+  .pAddButton,
+  .pDelButton{
+    margin-left: 0px;
+  }
+  th{
+    font-size: 1.1em;
+  }
+  td {
+    font-size: 1.1em;
+    &:nth-child(3) {
+      font-size: 1.1em;
     }
   }
 }

@@ -9,7 +9,6 @@
   float: left;
   cursor: pointer;
   position: relative;
-
   &:hover{
     .pImage{
       height: 170px;
@@ -26,9 +25,7 @@
       opacity: 1;
     }
   }
-
 }
-
 .pImage{
   height: 180px;
   width: 100%;

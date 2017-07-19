@@ -1,5 +1,5 @@
 <ng-container *ngIf="(category$ | async) as category">
-  <form class="pAppForm" #categoryForm="ngForm">
+  <div class="pAppForm">
     <header>
       <h2>{{category[0].id ? 'Edit ' + category[0].title : 'Add category'}}</h2>
     </header>
@@ -15,5 +15,5 @@
 
     <button class="btn btn-large pSubmitButton" (click)="category[0].id ? onEdit(category[0]) : onAdd(category[0])">Save</button>
     <button class="btn btn-large pSubmitButton" (click)="onDelete(category[0].id)">Delete</button>
-  </form>
+  </div>
 </ng-container>

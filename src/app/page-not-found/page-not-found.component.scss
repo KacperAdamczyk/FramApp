@@ -1,15 +1,17 @@
-$img-width: 600px;
-
 p {
   font-size: 30px;
-  font-weight: 500;
 }
 div {
-  width: $img-width;
+  width: 600px;
   margin: auto;
+  position: relative;
   img {
-    margin: auto;
-    width: $img-width;
+    width: 100%;
   }
 }
 
+@media only screen and (max-width: 767px) {
+  div {
+    width: 100%;
+  }
+}

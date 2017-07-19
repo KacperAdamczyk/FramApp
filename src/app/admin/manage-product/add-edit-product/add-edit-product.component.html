@@ -1,5 +1,5 @@
 <ng-container *ngIf="(product$ | async) as product">
-  <form class="pAppForm" #productForm="ngForm">
+  <div class="pAppForm">
     <header>
       <h2>{{product[0].id ? 'Edit ' + product[0].title : 'Add product'}}</h2>
     </header>
@@ -51,5 +51,5 @@
     <button class="btn btn-large pSubmitButton" (click)="product[0].id_real ? onEdit(product[0]) : onAdd(product[0])">Save</button>
     <button class="btn btn-large pSubmitButton" (click)="onDelete(product[0].id_real)">Delete</button>
 
-  </form>
+  </div>
 </ng-container>

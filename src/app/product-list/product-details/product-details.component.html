@@ -1,11 +1,13 @@
 <ng-container *ngIf="(product$ | async) as product; else elseBlock">
-  <div class="row pDetailsContainer">
-    <div class="col-xs-12 col-sm-12 col-md-5 col-lg-3" >
-      <img class="pImage" [src]="product[0].imgUrl" [alt]="product[0].title">
-    </div>
-    <div class="col-xs-12 col-sm-12 col-md-7 col-lg-9">
-      <h2>{{product[0].title}}</h2>
-      <p>{{product[0].description}}</p>
+  <div class="pDetailsContainer">
+    <div class="row">
+      <div class="col-xs-12 col-sm-12 col-md-5 col-lg-3" >
+        <img class="pImage" [src]="product[0].imgUrl" [alt]="product[0].title">
+      </div>
+      <div class="col-xs-12 col-sm-12 col-md-7 col-lg-9">
+        <h2>{{product[0].title}}</h2>
+        <p>{{product[0].description}}</p>
+      </div>
     </div>
   </div>
 </ng-container>

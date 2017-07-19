@@ -15,6 +15,7 @@ import { Category } from '../../../category';
 })
 export class AddEditProductComponent implements OnInit {
   product$: Observable<Product>;
+  lastProductId$: Observable<any>;
   categories$: Observable<Category[]>;
   constructor(private route: ActivatedRoute,
               private router: Router,
@@ -28,6 +29,7 @@ export class AddEditProductComponent implements OnInit {
       console.log(id);
       return id ? this.productService.getProduct(id) : new Observable(subscriber => subscriber.next([new Product()]));
     });
+    this.lastProductId$ = this.productService.getLastProductId();
     this.categories$ = this.categoryService.getCategories();
   }
   onAdd(product: Product) {

@@ -1,9 +1,9 @@
 <ng-container *ngIf="(product$ | async) as product">
-  <div class="pAddForm">
+  <div class="pAppForm">
     <header>
       <h2>{{product[0].id ? 'Edit ' + product[0].title : 'Add product'}}</h2>
     </header>
-    
+
     <div class="form-group">
       <label for="pProduct" >Title:</label><br />
       <input id="pProduct" class="form-control" name="Products" [(ngModel)]="product[0].title"/>

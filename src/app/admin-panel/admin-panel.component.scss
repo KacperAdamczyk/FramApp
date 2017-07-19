@@ -1,3 +1,56 @@
+@import "../../shared/styles/variables";
+@import '../../shared/styles/res';
+
+ul{
+  list-style-type: none;
+  margin: 50px 0 0 15px;
+  font-size: 1.2em;
+  letter-spacing: 2px;
+
+  li{
+    margin-left: 15px;
+    font-weight: 300;
+    &:first-of-type{
+      margin-top: 10px;
+    }
+
+    a{
+      font-size: 1.2em;
+      letter-spacing: 1px;
+      cursor: pointer;
+      color: $whiteFont;
+      &:hover{
+        text-decoration: none;
+        color: $blueColor;
+      }
+      &:focus{
+        text-decoration: none;
+        color: $blueColor;
+      }
+      &:active{
+        color: darken($blueColor, 10%);
+      }
+    }
+  }
+}
 .pMenuAdmin{
   margin-top: 70px;
+}
+@media only screen and (max-width: 767px) {
+  ul {
+    margin: 20px 0 0 0;
+    padding-bottom: 10px;
+    text-align: center;
+    font-weight: bold;
+    font-size: 1.3em;
+    li {
+      margin-left: 0;
+      a {
+        font-size: 0.8em;;
+        font-weight: 300;
+        cursor: pointer;
+        text-align: center;
+      }
+    }
+  }
 }

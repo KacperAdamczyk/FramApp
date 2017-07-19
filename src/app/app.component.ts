@@ -1,7 +1,7 @@
 import {Component, OnDestroy} from '@angular/core';
 
-import { CategoryService } from './category.service';
-import { Observable } from 'rxjs/Observable';
+import {CategoryService}      from './category.service';
+import {Observable}           from 'rxjs/Observable';
 
 @Component({
   selector: 'app-root',

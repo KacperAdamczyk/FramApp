@@ -1,4 +1,5 @@
 @import '../../../shared/styles/variables';
+@import '../../../shared/styles/res';
 
 .pAddButton{
   width: 100px;
@@ -19,6 +20,9 @@
     box-shadow:none;
   }
 }
+.pDelButton{
+  margin-left: 10px;
+}
 table{
   margin-top: 10px;
   margin-left: 50px;
@@ -34,7 +38,7 @@ th{
   background-color: $blackColor;
   height: 40px;
   font-weight: normal;
-  font-size: 1.4em;
+  font-size: 1.3em;
   text-align: center;
   @include tableBorder($borderColor);
 }
@@ -57,7 +61,7 @@ td{
   @include tableBorder($borderColor);
   &:nth-child(3){
     text-transform: uppercase;
-    font-size: 1.3em;
+    font-size: 1.1em;
   }
   a{
     cursor: pointer;

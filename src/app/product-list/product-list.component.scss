@@ -1,4 +1,5 @@
 @import '../../shared/styles/variables';
+@import '../../shared/styles/res';
 
 .pSquare{
   height: 220px;
@@ -31,11 +32,10 @@
 .pImage{
   height: 180px;
   width: 100%;
+  object-position: top;
+  object-fit: cover;
   background-color: $blackColor;
-  background-position: top center;
   -webkit-background-size: cover;
-  background-size: cover;
-  position: relative;
 }
 .pFavorited{
   position: absolute;
@@ -80,4 +80,14 @@
 .pNoProducts{
   margin: 50px;
   text-align: center;
+}
+
+/* Mobile */
+
+@media only screen and (max-width: 767px) {
+  .pSquare {
+    float: none;
+    width: 100%;
+    margin: 10px auto;
+  }
 }

@@ -1,14 +1,9 @@
 <ng-container *ngIf="(product$ | async) as product">
-  <form class="pAddForm" #productForm="ngForm">
+  <div class="pAddForm">
     <header>
       <h2>{{product[0].id ? 'Edit ' + product[0].title : 'Add product'}}</h2>
     </header>
-
-    <div class="form-group">
-      <label for="pId" >Last Id:</label><br />
-      <input id="pId" class="form-control" name="Id" [(ngModel)]="product[0].id" [value]="(lastProductId$ | async) + 1"/>
-    </div>
-
+    
     <div class="form-group">
       <label for="pProduct" >Title:</label><br />
       <input id="pProduct" class="form-control" name="Products" [(ngModel)]="product[0].title"/>
@@ -33,7 +28,7 @@
 
     <div class="form-group">
       <label for="pImg">Img URL:</label><br />
-      <input type="url" id="pImg" class="form-control" name="Img" value="https://unsplash.it/320/180/?random&id={{(lastProductId$ | async) + 1}}" [(ngModel)]="product[0].imgUrl"/>
+      <input type="url" id="pImg" class="form-control" name="Img" [(ngModel)]="product[0].imgUrl"/>
     </div>
 
     <div class="form-group">
@@ -51,5 +46,5 @@
     <button class="btn btn-large pSubmitButton" (click)="product[0].id_real ? onEdit(product[0]) : onAdd(product[0])">Save</button>
     <button class="btn btn-large pSubmitButton" (click)="onDelete(product[0].id_real)">Delete</button>
 
-  </form>
+  </div>
 </ng-container>

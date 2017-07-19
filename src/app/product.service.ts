@@ -44,9 +44,10 @@ export class ProductService {
   }
   getLastProductId() {
     return this.products$.map(products => {
-      let maxId = 0;
+      let maxId = -1;
       products.map(product => {
-        console.log( product);
+        console.log('ProductID:');
+         console.log(product);
         maxId = product.id > maxId ? product.id : maxId;
       });
       return maxId;
@@ -58,7 +59,9 @@ export class ProductService {
     this.products$.push(product);
   }
   editProduct(product: Product) {
-    this.products$.update(product.id_real, product);
+    const productId = product.id_real;
+    delete product.id_real;
+    this.products$.update(productId, product);
   }
   deleteProduct(productId: string) {
     if (!productId) { return; }

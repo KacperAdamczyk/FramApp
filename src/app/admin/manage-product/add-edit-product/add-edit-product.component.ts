@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import {ActivatedRoute, ParamMap, Router} from '@angular/router';
 
 import { ProductService } from '../../../product.service';
@@ -7,15 +7,18 @@ import { CategoryService } from '../../../category.service';
 import {Observable} from 'rxjs/Observable';
 import { Product } from '../../../product';
 import { Category } from '../../../category';
+import { Subscription } from 'rxjs/Subscription';
 
 @Component({
   selector: 'app-add-edit-product',
   templateUrl: './add-edit-product.component.html',
   styleUrls: ['./add-edit-product.component.scss']
 })
-export class AddEditProductComponent implements OnInit {
+export class AddEditProductComponent implements OnInit, OnDestroy {
   product$: Observable<Product>;
-  lastProductId$: Observable<any>;
+  lastProductIdSubscription$: Subscription;
+  lastProductId = -1;
+  product: Product;
   categories$: Observable<Category[]>;
   constructor(private route: ActivatedRoute,
               private router: Router,
@@ -27,10 +30,22 @@ export class AddEditProductComponent implements OnInit {
       const paramName = 'id';
       const id = params.get(paramName);
       console.log(id);
-      return id ? this.productService.getProduct(id) : new Observable(subscriber => subscriber.next([new Product()]));
+      return id ? this.productService.getProduct(id) : new Observable(subscriber => {
+        this.product = new Product();
+        subscriber.next([this.product]);
+      });
     });
-    this.lastProductId$ = this.productService.getLastProductId();
     this.categories$ = this.categoryService.getCategories();
+    this.lastProductIdSubscription$ = this.productService.getLastProductId().subscribe(productId => {
+      this.lastProductId = productId + 1;
+      if (this.product) {
+        this.product.id = this.lastProductId;
+        this.product.imgUrl = `https://unsplash.it/320/180/?random&id=${this.lastProductId}`;
+      }
+    })
+  }
+  ngOnDestroy() {
+    this.lastProductIdSubscription$.unsubscribe();
   }
   onAdd(product: Product) {
     this.productService.addProduct(product);

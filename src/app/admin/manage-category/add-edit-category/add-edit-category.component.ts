@@ -48,13 +48,12 @@ export class AddEditCategoryComponent implements OnInit, OnDestroy {
   }
   buildForm(): void {
     this.categoryForm = this.fb.group({
-      title: [this.category.title, Validators.required],
-      description: [this.category.description]
+      title: [ this.category.title, Validators.required ],
+      description: [ this.category.description ]
     });
-    this.categoryForm.valueChanges.subscribe(data => this.onValueChanged(data));
+    this.categoryForm.valueChanges.subscribe(data => this.onValueChanged());
   }
-  // TODO fix this
-  onValueChanged(data?: any) {
+  onValueChanged(): void {
     if (!this.categoryForm) { return; }
 
     for (const field in this.formErrors) {
@@ -65,7 +64,7 @@ export class AddEditCategoryComponent implements OnInit, OnDestroy {
       if (control && control.dirty && !control.valid) {
         const messages = this.validationMessages[field];
         for (const key in control.errors) {
-          if (!control.errors.hasOwnProperty(field)) { continue; }
+          if (!control.errors.hasOwnProperty(key)) { continue; }
           this.formErrors[field] += messages[key] + ' ';
         }
       }

@@ -1,8 +1,9 @@
 <ng-container *ngIf="category">
   <header>
-  <h2>{{category.id ? 'Edit ' + category.title : 'Add category'}}</h2>
+  <h2>{{ category.id ? 'Edit ' + category.title : 'Add category' }}</h2>
   </header>
   <form class="pAppForm" [formGroup]="categoryForm" (ngSubmit)="category.id ? onEdit() : onAdd()">
+
     <div class="form-group">
       <label for="title">Title</label>
       <input id="title" class="form-control" formControlName="title" required/>
@@ -15,26 +16,7 @@
       <div *ngIf="formErrors.description" class="alert alert-danger">{{ formErrors.description }}</div>
     </div>
 
-    <button class="btn btn-large pSubmitButton" [disabled]="!categoryForm.valid">{{category.id ? 'Save' : 'Add'}}</button>
+    <button class="btn btn-large pSubmitButton" [disabled]="!categoryForm.valid">{{ category.id ? 'Save' : 'Add' }}</button>
     <button class="btn btn-large pSubmitButton" *ngIf="category.id" (click)="onDelete(category.id)">Delete</button>
   </form>
 </ng-container>
-<!--<ng-container *ngIf="(category$ | async) as category">-->
-  <!--<div class="pAppForm">-->
-    <!--<header>-->
-      <!--<h2>{{category.id ? 'Edit ' + category.title : 'Add category'}}</h2>-->
-    <!--</header>-->
-    <!--<div class="form-group">-->
-      <!--<label for="pProduct" >Name:</label><br />-->
-      <!--<input id="pProduct" class="form-control" [(ngModel)]="category.title" name="title"/>-->
-    <!--</div>-->
-
-    <!--<div class="form-group">-->
-      <!--<label for="pProductDesc">Description:</label><br />-->
-      <!--<textarea id="pProductDesc" name="ProductDescription" class="form-control" placeholder="Type some text..." [(ngModel)]="category.description"></textarea>-->
-    <!--</div>-->
-
-    <!--<button class="btn btn-large pSubmitButton" (click)="category.id ? onEdit(category) : onAdd(category)">Save</button>-->
-    <!--<button class="btn btn-large pSubmitButton" (click)="onDelete(category.id)">Delete</button>-->
-  <!--</div>-->
-<!--</ng-container>-->

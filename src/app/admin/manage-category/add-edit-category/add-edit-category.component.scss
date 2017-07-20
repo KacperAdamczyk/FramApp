@@ -1,12 +1,12 @@
 @import '../../../../shared/styles/variables';
 @import '../../../../shared/styles/res';
 
+h2{
+  margin: 50px 0 30px 50px;
+}
 .pAppForm{
   margin: 50px 40px 0 50px;
   max-width: 400px;
-  h2{
-    margin-bottom: 30px;
-  }
   textarea{
     min-height: 150px;
   }

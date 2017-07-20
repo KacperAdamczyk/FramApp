@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms'
+import { ReactiveFormsModule } from '@angular/forms'
 
 import { CategoryService } from '../category.service';
 import { ProductService } from '../product.service';
@@ -17,7 +17,6 @@ import { AdminRoutingModule } from './admin-routing.module';
 @NgModule({
   imports: [
     CommonModule,
-    FormsModule, // TODO switch completely to reactive forms
     ReactiveFormsModule,
     AdminRoutingModule
   ],

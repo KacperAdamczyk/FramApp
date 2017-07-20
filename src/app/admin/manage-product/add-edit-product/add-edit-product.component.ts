@@ -30,6 +30,18 @@ export class AddEditProductComponent implements OnInit, OnDestroy {
     title: {
       required: 'Title is required.',
     },
+    promoted: {},
+    price: {
+      required: 'Price is required.',
+    },
+    amount: {},
+    imgUrl: {
+      required: 'Image url is required.',
+    },
+    category: {
+      required: 'Category is required.',
+    },
+    description: {}
   };
   productSubscription$: Subscription;
   lastProductIdSubscription$: Subscription;
@@ -76,6 +88,24 @@ export class AddEditProductComponent implements OnInit, OnDestroy {
       category: [ this.product.category, Validators.required ],
       description: [ this.product.description ]
     });
+    this.productForm.valueChanges.subscribe(data => this.onValueChanged());
+  }
+  onValueChanged(): void {
+    if (!this.productForm) { return; }
+
+    for (const field in this.formErrors) {
+      if (!this.formErrors.hasOwnProperty(field)) { continue; }
+      this.formErrors[field] = '';
+      const control = this.productForm.get(field);
+
+      if (control && control.dirty && !control.valid) {
+        const messages = this.validationMessages[field];
+        for (const key in control.errors) {
+          if (!control.errors.hasOwnProperty(key)) { continue; }
+          this.formErrors[field] += messages[key] + ' ';
+        }
+      }
+    }
   }
   onAdd(): void {
     const product = this.productForm.value;

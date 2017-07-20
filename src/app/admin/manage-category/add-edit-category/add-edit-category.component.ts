@@ -23,7 +23,7 @@ export class AddEditCategoryComponent implements OnInit, OnDestroy {
   validationMessages = {
     title: {
       required: 'Title is required.',
-    },
+    }
   };
   categorySubscription$: Subscription;
   category: Category;

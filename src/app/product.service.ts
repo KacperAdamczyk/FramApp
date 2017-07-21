@@ -43,7 +43,7 @@ export class ProductService {
         product.imgUrl, product.promoted, product.price, product.amount);
     });
   }
-  getLastProductId() {
+  getLastProductId(): Observable<number> {
     return this.products$.map(products => {
       let maxId = -1;
       products.map(product => {

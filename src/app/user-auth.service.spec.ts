@@ -2,10 +2,16 @@ import { TestBed, inject } from '@angular/core/testing';
 
 import { UserAuthService } from './user-auth.service';
 
+import { CoolSessionStorage } from 'angular2-cool-storage'
+import { FakeCoolSessionStorege } from '../testing/FakeCoolSessionStorage'
+
 describe('UserAuthService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [UserAuthService]
+      providers: [
+        UserAuthService,
+        { provide: CoolSessionStorage, useClass: FakeCoolSessionStorege }
+      ]
     });
   });
 

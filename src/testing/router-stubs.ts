@@ -1,11 +1,13 @@
-import {Injectable} from '@angular/core';
+import { Injectable } from '@angular/core';
 
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { convertToParamMap, ParamMap } from '@angular/router';
 
 @Injectable()
 export class RouterStub {
-navigateByUrl(url: string) { return url; }
+  navigateByUrl(url: string) {
+    return url;
+  }
 }
 
 @Injectable()
@@ -17,7 +19,10 @@ export class ActivatedRouteStub {
 
   // Test parameters
   private _testParamMap: ParamMap;
-  get testParamMap() { return this._testParamMap; }
+  get testParamMap() {
+    return this._testParamMap;
+  }
+
   set testParamMap(params: {}) {
     this._testParamMap = convertToParamMap(params);
     this.subject.next(this._testParamMap);
@@ -25,6 +30,6 @@ export class ActivatedRouteStub {
 
   // ActivatedRoute.snapshot.paramMap
   get snapshot() {
-    return { paramMap: this.testParamMap };
+    return {paramMap: this.testParamMap};
   }
 }

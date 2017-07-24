@@ -4,14 +4,15 @@ import { RouterModule, Routes } from '@angular/router';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component'
 
 const appRoutes: Routes = [
-  { path: '', redirectTo: 'products', pathMatch: 'full' },
-  { path: '**', component: PageNotFoundComponent }
+  {path: '', redirectTo: 'products', pathMatch: 'full'},
+  {path: '**', component: PageNotFoundComponent}
 ];
 
 @NgModule({
   imports: [
-    RouterModule.forRoot(appRoutes/*, { enableTracing: true }*/ ),
+    RouterModule.forRoot(appRoutes/*, { enableTracing: true }*/),
   ],
-  exports: [ RouterModule ]
+  exports: [RouterModule]
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {
+}

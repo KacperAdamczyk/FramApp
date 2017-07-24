@@ -7,7 +7,7 @@ import { CategoryService } from '../category.service';
 
 import { Product } from '../product';
 
-import {ActivatedRoute, ParamMap, Router} from '@angular/router';
+import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
 import { Subscription } from 'rxjs/Subscription'
 
@@ -19,11 +19,13 @@ import { Subscription } from 'rxjs/Subscription'
 export class ProductListComponent implements OnInit, OnDestroy {
   products$: Observable<Product[]>;
   categoryNameSubscription$: Subscription;
+
   constructor(private route: ActivatedRoute,
               private router: Router,
               private categoryService: CategoryService,
               private productService: ProductService) {
   }
+
   ngOnInit() {
     const categoryName$ = this.route.paramMap.map((params: ParamMap) => params.get('category'));
 
@@ -35,6 +37,7 @@ export class ProductListComponent implements OnInit, OnDestroy {
     this.products$ = categoryName$
       .switchMap(name => this.productService.getProducts(name));
   }
+
   ngOnDestroy() {
     this.categoryNameSubscription$.unsubscribe();
   }

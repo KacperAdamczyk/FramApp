@@ -5,6 +5,6 @@ $whiteFont: #f3f3f3;
 $imageWidth: 320px;
 $borderColor: #bbb;
 
-@mixin tableBorder($borderColor){
+@mixin tableBorder($borderColor) {
   border: 1px solid $borderColor;
 }

@@ -1,7 +1,7 @@
 @import '../../shared/styles/variables';
 @import '../../shared/styles/res';
 
-.pSquare{
+.pSquare {
   height: 220px;
   width: $imageWidth;
   max-width: $imageWidth;
@@ -9,13 +9,13 @@
   float: left;
   cursor: pointer;
   position: relative;
-  &:hover{
-    .pImage{
+  &:hover {
+    .pImage {
       height: 170px;
       opacity: .1;
       transition: .3s ease-in-out;
     }
-    .pTitle{
+    .pTitle {
       height: 50px;
       line-height: 50px;
       transition: .3s ease-in-out;
@@ -26,7 +26,8 @@
     }
   }
 }
-.pImage{
+
+.pImage {
   height: 180px;
   width: 100%;
   object-position: top;
@@ -34,7 +35,8 @@
   background-color: $blackColor;
   -webkit-background-size: cover;
 }
-.pFavorited{
+
+.pFavorited {
   position: absolute;
   top: 0;
   right: 0;
@@ -48,7 +50,8 @@
   background-size: cover;
   z-index: 999;
 }
-.pTitle{
+
+.pTitle {
   height: 40px;
   width: 100%;
   background-color: #322C2C;
@@ -59,6 +62,7 @@
   letter-spacing: 2px;
   line-height: 40px;
 }
+
 .pDetailsButton {
   transition: .5s ease;
   opacity: 0;
@@ -68,13 +72,15 @@
   transform: translate(-50%, -80%);
   -ms-transform: translate(-50%, -80%)
 }
-.pDetailsButtonText{
+
+.pDetailsButtonText {
   background-color: $blueColor;
   color: white;
   font-size: 16px;
   padding: 16px 32px;
 }
-.pNoProducts{
+
+.pNoProducts {
   margin: 50px;
   text-align: center;
 }

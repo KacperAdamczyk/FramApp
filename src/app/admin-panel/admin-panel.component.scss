@@ -1,39 +1,41 @@
 @import "../../shared/styles/variables";
 @import '../../shared/styles/res';
 
-ul{
+ul {
   list-style-type: none;
   margin: 50px 0 0 15px;
   font-size: 1.2em;
   letter-spacing: 2px;
-  li{
+  li {
     margin-left: 15px;
-    &:first-of-type{
+    &:first-of-type {
       margin-top: 20px;
     }
-    a{
+    a {
       font-size: 1.2em;
       letter-spacing: 1px;
       cursor: pointer;
       font-weight: 300;
       color: $whiteFont;
-      &:hover{
+      &:hover {
         text-decoration: none;
         color: $blueColor;
       }
-      &:focus{
+      &:focus {
         text-decoration: none;
         color: $blueColor;
       }
-      &:active{
+      &:active {
         color: darken($blueColor, 10%);
       }
     }
   }
 }
-.pMenuAdmin{
+
+.pMenuAdmin {
   margin-top: 70px;
 }
+
 @media only screen and (max-width: 767px) {
   ul {
     margin: 20px 0 0 0;
@@ -43,7 +45,7 @@ ul{
     font-size: 1.3em;
     li {
       margin-left: 0;
-      &:first-of-type{
+      &:first-of-type {
         margin-top: 10px;
       }
       a {
@@ -54,7 +56,7 @@ ul{
       }
     }
   }
-  .pMenuAdmin{
+  .pMenuAdmin {
     margin-top: 20px;
   }
 }

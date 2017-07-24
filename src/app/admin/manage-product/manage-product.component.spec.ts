@@ -12,13 +12,13 @@ describe('ManageProductComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ManageProductComponent ],
+      declarations: [ManageProductComponent],
       providers: [
-        { provide: ProductService, useClass: FakeProductService }
+        {provide: ProductService, useClass: FakeProductService}
       ],
-      schemas: [ NO_ERRORS_SCHEMA ]
+      schemas: [NO_ERRORS_SCHEMA]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

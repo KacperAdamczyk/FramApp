@@ -12,7 +12,7 @@
 
     <div class="form-group">
       <label for="promoted">Promoted</label>
-      <input id="promoted" type="checkbox" formControlName="promoted" />
+      <input id="promoted" type="checkbox" formControlName="promoted"/>
     </div>
 
     <div class="form-group">
@@ -34,9 +34,9 @@
     </div>
 
     <div class="form-group">
-      <label for="category">Category:</label><br />
+      <label for="category">Category:</label><br/>
       <select id="category" class="form-control" formControlName="category" required>
-        <option *ngFor="let category of categories$ | async" [value]="category.title" >{{category.title}}</option>
+        <option *ngFor="let category of categories$ | async" [value]="category.title">{{category.title}}</option>
       </select>
       <div *ngIf="formErrors.category" class="alert alert-danger">{{ formErrors.category }}</div>
     </div>
@@ -47,7 +47,9 @@
       <div *ngIf="formErrors.description" class="alert alert-danger">{{ formErrors.description }}</div>
     </div>
 
-    <button class="btn btn-large pSubmitButton" [disabled]="!productForm.valid">{{ product.id_real ? 'Save' : 'Add' }}</button>
-    <button class="btn btn-large pSubmitButton" *ngIf="product.id_real" (click)="onDelete(product.id_real)">Delete</button>
+    <button class="btn btn-large pSubmitButton" [disabled]="!productForm.valid">{{ product.id_real ? 'Save' : 'Add' }}
+    </button>
+    <button class="btn btn-large pSubmitButton" *ngIf="product.id_real" (click)="onDelete(product.id_real)">Delete
+    </button>
   </form>
 </ng-container>

@@ -5,7 +5,7 @@ import { NgModule } from '@angular/core';
 
 import { AngularFireModule } from 'angularfire2';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
-import { AngularFireAuthModule} from 'angularfire2/auth';
+import { AngularFireAuthModule } from 'angularfire2/auth';
 import { firebaseConfig } from './firebaseConfig';
 
 import { CoolStorageModule } from 'angular2-cool-storage';
@@ -40,11 +40,12 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
     CoolStorageModule,
     AppRoutingModule
   ],
-providers: [
-  CategoryService,
-  ProductService,
-  UserAuthService
+  providers: [
+    CategoryService,
+    ProductService,
+    UserAuthService
   ],
-  bootstrap: [ AppComponent ]
+  bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+}

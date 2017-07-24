@@ -14,13 +14,13 @@ describe('ProductDetailsComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ProductDetailsComponent ],
+      declarations: [ProductDetailsComponent],
       providers: [
-        { provide: ActivatedRoute, useClass: ActivatedRouteStub },
-        { provide: ProductService, useClass: FakeProductService }
+        {provide: ActivatedRoute, useClass: ActivatedRouteStub},
+        {provide: ProductService, useClass: FakeProductService}
       ]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

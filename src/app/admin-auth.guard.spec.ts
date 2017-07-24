@@ -10,7 +10,7 @@ describe('AdminAuthGuard', () => {
     TestBed.configureTestingModule({
       providers: [
         AdminAuthGuard,
-        { provide: UserAuthService, useClass: FakeUserAuthService }
+        {provide: UserAuthService, useClass: FakeUserAuthService}
       ],
     });
   });

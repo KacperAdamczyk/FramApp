@@ -1,48 +1,50 @@
 @import '../../../../shared/styles/variables';
 @import '../../../../shared/styles/res';
 
-h2{
+h2 {
   margin: 50px 0 30px 50px;
 }
-.pAppForm{
+
+.pAppForm {
   margin: 0 40px 0 50px;
   max-width: 400px;
-  textarea{
+  textarea {
     min-height: 150px;
   }
   input[type]:focus,
   textarea:focus,
   textarea:active,
-  select:focus{
+  select:focus {
     border-color: $blueColor !important;
   }
 }
-.pSubmitButton{
+
+.pSubmitButton {
   width: 100px;
   margin: 9px 15px 0 0;
   background-color: $blueColor;
   border: none;
   color: $whiteFont;
-  &:hover{
+  &:hover {
     background-color: darken($blueColor, 10%);
     color: $whiteFont;
   }
-  &:focus{
+  &:focus {
     color: $whiteFont;
   }
-  &:active{
+  &:active {
     color: $whiteFont;
     outline: none;
-    box-shadow:none;
+    box-shadow: none;
   }
 }
 
 //---------- Mobile ----------
 
 @media only screen and (max-width: 767px) {
-  .pAppForm{
+  .pAppForm {
     margin: 50px 0 0 0;
-    textarea{
+    textarea {
       min-height: 100px;
     }
   }

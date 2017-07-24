@@ -10,7 +10,7 @@ import { Category } from './category';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: [ './app.component.scss' ]
+  styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
   title = 'FramApp';
@@ -19,6 +19,7 @@ export class AppComponent implements OnInit {
   userLoggedInLabel = 'Log Out';
   userLoggedOutLabel = 'Log In';
   userStorageLabel = 'userLoggedIn';
+
   constructor(private categoryService: CategoryService,
               private coolSessionStorage: CoolSessionStorage,
               private router: Router) {
@@ -35,8 +36,11 @@ export class AppComponent implements OnInit {
   onUserButtonClick(): void {
     this.userLoggedIn = !this.userLoggedIn;
     this.coolSessionStorage.setItem(this.userStorageLabel, String(this.userLoggedIn));
-    if (!this.userLoggedIn) { this.redirectToDefault(); }
+    if (!this.userLoggedIn) {
+      this.redirectToDefault();
+    }
   }
+
   redirectToDefault(): void {
     if (/^[/]admin[/].*/.test(this.router.url)) {
       this.router.navigateByUrl('');

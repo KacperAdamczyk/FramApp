@@ -21,11 +21,11 @@ describe('AppComponent', () => {
         AppComponent
       ],
       providers: [
-        { provide: CategoryService, useClass: FakeCategoryService },
-        { provide: CoolSessionStorage, useClass: FakeCoolSessionStorege },
-        { provide: Router, useClass: RouterStub }
-        ],
-      schemas: [ NO_ERRORS_SCHEMA ]
+        {provide: CategoryService, useClass: FakeCategoryService},
+        {provide: CoolSessionStorage, useClass: FakeCoolSessionStorege},
+        {provide: Router, useClass: RouterStub}
+      ],
+      schemas: [NO_ERRORS_SCHEMA]
     }).compileComponents();
   }));
   beforeEach(() => {

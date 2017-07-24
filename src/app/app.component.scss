@@ -1,99 +1,107 @@
 @import "../shared/styles/variables";
 @import "../shared/styles/res";
 
-.pNav{
+.pNav {
   background-color: $blackColor;
   margin-bottom: 0;
   border-radius: 0;
   border-bottom: 1px solid $blueColor;
-  h1{
+  h1 {
     margin-left: 15px;
     color: $blueColor;
     line-height: 50px;
   }
 }
-ul{
+
+ul {
   list-style-type: none;
   margin: 50px 0 0 15px;
   font-size: 1.2em;
   letter-spacing: 2px;
 }
-.pSignButton{
+
+.pSignButton {
   width: 100px;
   height: 32px;
   margin: 9px 15px 0 0;
   background-color: $blueColor;
   border: none;
   color: $whiteFont;
-  &:hover{
+  &:hover {
     background-color: darken($blueColor, 10%);
     color: $whiteFont;
   }
-  &:focus{
+  &:focus {
     color: $whiteFont;
     outline: none;
   }
-  &:active{
+  &:active {
     color: $whiteFont;
-    outline: none!important;
-    box-shadow:none;
+    outline: none !important;
+    box-shadow: none;
   }
-  &Mobile{
+  &Mobile {
     width: 80px;
     margin-right: 20px;
     font-family: 'Roboto', sans-serif;
   }
 }
-.pMenu{
+
+.pMenu {
   height: calc(100vh - 51px);
   background-color: #322C2C;
   color: $blueColor;
   font-weight: bold;
-  li{
+  li {
     font-style: normal;
   }
 }
-.pMenuAdmin{
+
+.pMenuAdmin {
   margin-top: 70px;
 }
-.pContainer{
+
+.pContainer {
   padding-top: 15px;
   height: calc(100vh - 51px);
   overflow-y: auto;
 }
-.showOnMobile{
+
+.showOnMobile {
   display: none;
 }
-.hideOnMobile{
+
+.hideOnMobile {
   display: block;
 }
+
 @media only screen and (max-width: 767px) {
-  .showOnMobile{
+  .showOnMobile {
     display: block;
   }
-  .hideOnMobile{
+  .hideOnMobile {
     display: none;
   }
-  .pMenu{
+  .pMenu {
     display: none;
   }
-  .pMenuMobile{
+  .pMenuMobile {
     height: 100%;
     background-color: #322C2C;
     color: $blueColor;
     border-top: 1px solid $blueColor;
     margin: 0 -15px !important;
-    li{
+    li {
       font-weight: normal;
-      ul{
+      ul {
         margin: 20px 0 0 0;
         padding-bottom: 10px;
         text-align: center;
         font-weight: bold;
         font-size: 1.3em;
-        li{
+        li {
           margin-left: 0;
-          a{
+          a {
             font-size: 0.8em;;
             font-weight: 300;
             text-align: center;

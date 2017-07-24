@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import {ActivatedRoute, ParamMap, Router} from '@angular/router';
+import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 
 import { Category } from '../../../category'
 import { Observable } from 'rxjs/Observable';
@@ -27,6 +27,7 @@ export class AddEditCategoryComponent implements OnInit, OnDestroy {
   };
   categorySubscription$: Subscription;
   category: Category;
+
   constructor(private route: ActivatedRoute,
               private router: Router,
               private categoryService: CategoryService,
@@ -43,47 +44,60 @@ export class AddEditCategoryComponent implements OnInit, OnDestroy {
       this.buildForm();
     });
   }
+
   ngOnDestroy() {
     this.categorySubscription$.unsubscribe();
   }
+
   buildForm(): void {
     this.categoryForm = this.fb.group({
-      title: [ this.category.title, Validators.required ],
-      description: [ this.category.description ]
+      title: [this.category.title, Validators.required],
+      description: [this.category.description]
     });
     this.categoryForm.valueChanges.subscribe(data => this.onValueChanged());
   }
+
   onValueChanged(): void {
-    if (!this.categoryForm) { return; }
+    if (!this.categoryForm) {
+      return;
+    }
 
     for (const field in this.formErrors) {
-      if (!this.formErrors.hasOwnProperty(field)) { continue; }
+      if (!this.formErrors.hasOwnProperty(field)) {
+        continue;
+      }
       this.formErrors[field] = '';
       const control = this.categoryForm.get(field);
 
       if (control && control.dirty && !control.valid) {
         const messages = this.validationMessages[field];
         for (const key in control.errors) {
-          if (!control.errors.hasOwnProperty(key)) { continue; }
+          if (!control.errors.hasOwnProperty(key)) {
+            continue;
+          }
           this.formErrors[field] += messages[key] + ' ';
         }
       }
     }
   }
+
   onAdd(): void {
     this.categoryService.addCategory(this.categoryForm.value);
     this.redirectToDefault();
   }
+
   onEdit(): void {
     const category = this.categoryForm.value;
     category.id = this.category.id;
     this.categoryService.editCategory(category);
     this.redirectToDefault();
   }
+
   onDelete(id: string): void {
     this.categoryService.deleteCategory(id);
     this.redirectToDefault();
   }
+
   private redirectToDefault(): void {
     this.router.navigateByUrl('admin/categories');
   }

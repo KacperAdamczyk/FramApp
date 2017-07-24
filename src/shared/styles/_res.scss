@@ -1,40 +1,48 @@
-*{
+* {
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
 }
+
 *:focus {
   outline: 0;
 }
-body{
+
+body {
   background-color: $bgColor;
   font-family: 'Roboto', sans-serif;
 }
-.navbar{
+
+.navbar {
   border: none;
 }
-h1,h2,h3,h4{
+
+h1, h2, h3, h4 {
   font-family: 'Anton', sans-serif;
   color: $blueColor;
 }
-ul,li,h1,h2,h3,body{
-  margin:0;
-  padding:0;
+
+ul, li, h1, h2, h3, body {
+  margin: 0;
+  padding: 0;
 }
-a{
+
+a {
   text-decoration: none;
-  &:hover{
+  &:hover {
     text-decoration: none;
   }
-  &:focus{
+  &:focus {
     text-decoration: none;
   }
 }
+
 .navbar.navbar-default {
   border: 0;
   -webkit-box-shadow: none;
   box-shadow: none;
 }
+
 .navbar.navbar-default .navbar-collapse {
   border: 0;
   -webkit-box-shadow: none;

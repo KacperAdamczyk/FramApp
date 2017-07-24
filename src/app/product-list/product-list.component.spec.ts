@@ -6,7 +6,7 @@ import { ProductListComponent } from './product-list.component';
 import { UserAuthService } from '../user-auth.service';
 import { FakeUserAuthService } from '../../testing/FakeUserAuthService';
 
-import {ActivatedRoute, Router } from '@angular/router'
+import { ActivatedRoute, Router } from '@angular/router'
 import { RouterStub, ActivatedRouteStub } from '../../testing/router-stubs';
 
 import { CategoryService } from '../category.service';
@@ -21,17 +21,17 @@ describe('ProductListComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ProductListComponent ],
+      declarations: [ProductListComponent],
       providers: [
-        { provide: UserAuthService, useClass: FakeUserAuthService },
-        { provide: Router, useClass: RouterStub },
-        { provide: ActivatedRoute, useClass: ActivatedRouteStub },
-        { provide: CategoryService, useClass: FakeCategoryService },
-        { provide: ProductService, useClass: FakeProductService }
+        {provide: UserAuthService, useClass: FakeUserAuthService},
+        {provide: Router, useClass: RouterStub},
+        {provide: ActivatedRoute, useClass: ActivatedRouteStub},
+        {provide: CategoryService, useClass: FakeCategoryService},
+        {provide: ProductService, useClass: FakeProductService}
       ],
-      schemas: [ NO_ERRORS_SCHEMA ]
+      schemas: [NO_ERRORS_SCHEMA]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

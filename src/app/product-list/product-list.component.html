@@ -1,5 +1,6 @@
 <ng-container *ngIf="(products$ | async) as products">
-  <div class="pSquare" *ngFor="let product of products" routerLink="/product/{{product.id_real}}" routerLinkActive="active">
+  <div class="pSquare" *ngFor="let product of products" routerLink="/product/{{product.id_real}}"
+       routerLinkActive="active">
     <div class="pDetailsButton">
       <div class="pDetailsButtonText">Details</div>
     </div>

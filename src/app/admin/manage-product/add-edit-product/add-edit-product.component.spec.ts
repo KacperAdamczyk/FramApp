@@ -6,7 +6,7 @@ import { AddEditProductComponent } from './add-edit-product.component';
 import { ActivatedRoute, Router } from '@angular/router';
 
 import { ActivatedRouteStub, RouterStub } from '../../../../testing/router-stubs';
-import {FormBuilder} from '@angular/forms';
+import { FormBuilder } from '@angular/forms';
 
 import { ProductService } from '../../../product.service'
 import { FakeProductService } from '../../../../testing/FakeProductService'
@@ -20,17 +20,17 @@ describe('AddEditProductComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ AddEditProductComponent ],
+      declarations: [AddEditProductComponent],
       providers: [
-        { provide: ActivatedRoute, useClass: ActivatedRouteStub },
-        { provide: Router, useClass: RouterStub },
-        { provide: ProductService, useClass: FakeProductService },
-        { provide: CategoryService, useClass: FakeCategoryService },
+        {provide: ActivatedRoute, useClass: ActivatedRouteStub},
+        {provide: Router, useClass: RouterStub},
+        {provide: ProductService, useClass: FakeProductService},
+        {provide: CategoryService, useClass: FakeCategoryService},
         FormBuilder
       ],
-      schemas: [ NO_ERRORS_SCHEMA ]
+      schemas: [NO_ERRORS_SCHEMA]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

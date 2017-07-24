@@ -32,4 +32,5 @@ import { AdminRoutingModule } from './admin-routing.module';
     AdminAuthGuard
   ]
 })
-export class AdminModule { }
+export class AdminModule {
+}

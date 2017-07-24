@@ -16,16 +16,16 @@ describe('AddEditCategoryComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ AddEditCategoryComponent ],
+      declarations: [AddEditCategoryComponent],
       providers: [
-        { provide: ActivatedRoute, useClass: ActivatedRouteStub },
-        { provide: Router, useClass: RouterStub },
-        { provide: CategoryService, useClass: FakeCategoryService },
+        {provide: ActivatedRoute, useClass: ActivatedRouteStub},
+        {provide: Router, useClass: RouterStub},
+        {provide: CategoryService, useClass: FakeCategoryService},
         FormBuilder
       ],
-      schemas: [ NO_ERRORS_SCHEMA ]
+      schemas: [NO_ERRORS_SCHEMA]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

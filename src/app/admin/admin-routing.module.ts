@@ -11,16 +11,16 @@ import { AddEditProductComponent } from './manage-product/add-edit-product/add-e
 const adminRoutes: Routes = [
   {
     path: 'admin',
-    canActivate: [ AdminAuthGuard ],
+    canActivate: [AdminAuthGuard],
     children: [
-      { path: 'categories', component: ManageCategoryComponent },
-      { path: 'products', component: ManageProductComponent },
-      { path: 'category', component: AddEditCategoryComponent },
-      { path: 'category/:id', component: AddEditCategoryComponent },
-      { path: 'product', component: AddEditProductComponent },
-      { path: 'product/:id', component: AddEditProductComponent },
-      { path: '', redirectTo: '/products', pathMatch: 'full' }
-      ]
+      {path: 'categories', component: ManageCategoryComponent},
+      {path: 'products', component: ManageProductComponent},
+      {path: 'category', component: AddEditCategoryComponent},
+      {path: 'category/:id', component: AddEditCategoryComponent},
+      {path: 'product', component: AddEditProductComponent},
+      {path: 'product/:id', component: AddEditProductComponent},
+      {path: '', redirectTo: '/products', pathMatch: 'full'}
+    ]
   },
 ];
 
@@ -28,6 +28,7 @@ const adminRoutes: Routes = [
   imports: [
     RouterModule.forChild(adminRoutes)
   ],
-  exports: [ RouterModule ]
+  exports: [RouterModule]
 })
-export class AdminRoutingModule { }
+export class AdminRoutingModule {
+}

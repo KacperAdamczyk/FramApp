@@ -1,6 +1,6 @@
 <ng-container *ngIf="category">
   <header>
-  <h2>{{ category.id ? 'Edit ' + category.title : 'Add category' }}</h2>
+    <h2>{{ category.id ? 'Edit ' + category.title : 'Add category' }}</h2>
   </header>
   <form class="pAppForm" [formGroup]="categoryForm" (ngSubmit)="category.id ? onEdit() : onAdd()">
 
@@ -16,7 +16,8 @@
       <div *ngIf="formErrors.description" class="alert alert-danger">{{ formErrors.description }}</div>
     </div>
 
-    <button class="btn btn-large pSubmitButton" [disabled]="!categoryForm.valid">{{ category.id ? 'Save' : 'Add' }}</button>
+    <button class="btn btn-large pSubmitButton" [disabled]="!categoryForm.valid">{{ category.id ? 'Save' : 'Add' }}
+    </button>
     <button class="btn btn-large pSubmitButton" *ngIf="category.id" (click)="onDelete(category.id)">Delete</button>
   </form>
 </ng-container>

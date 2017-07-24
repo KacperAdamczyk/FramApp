@@ -3,7 +3,7 @@
 
 li {
   margin-left: 15px;
-  &:first-of-type{
+  &:first-of-type {
     margin-top: 20px;
   }
   a {
@@ -12,23 +12,24 @@ li {
     cursor: pointer;
     font-weight: 300;
     color: $whiteFont;
-    &:hover{
+    &:hover {
       text-decoration: none;
       color: $blueColor;
     }
-    &:focus{
+    &:focus {
       text-decoration: none;
       color: $blueColor;
     }
-    &:active{
+    &:active {
       color: darken($blueColor, 10%);
     }
   }
 }
+
 @media only screen and (max-width: 767px) {
   li {
     margin-left: 0;
-    &:first-of-type{
+    &:first-of-type {
       margin-top: 10px;
     }
     a {

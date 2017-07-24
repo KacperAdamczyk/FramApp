@@ -9,22 +9,29 @@ export class FakeProductService {
     new Product('', 3, 'Product #4'),
     new Product('', 4, 'Product #5'),
   ];
+
   getProducts(category: string = ''): Observable<Product[]> {
     return new Observable(observer => observer.next(this.products));
   }
+
   getProduct(id: string): Observable<Product> {
     return new Observable(observer => observer.next(new Product(id, 666, 'Selected product')));
   }
+
   getLastProductId(): Observable<number> {
     const id = 123;
     return new Observable(observer => observer.next(id));
   }
+
   addProduct(product: Product) {
   }
+
   editProduct(product: Product) {
   }
+
   deleteProduct(productId: string) {
   }
+
   deleteAllProducts() {
   }
 }

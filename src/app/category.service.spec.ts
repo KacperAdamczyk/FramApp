@@ -12,8 +12,8 @@ describe('CategoryService', () => {
     TestBed.configureTestingModule({
       providers: [
         CategoryService,
-        { provide: AngularFireAuth, useClass: FakeAngularFireAuth },
-        { provide: AngularFireDatabase, useClass: FakeAngularFireDatabase }
+        {provide: AngularFireAuth, useClass: FakeAngularFireAuth},
+        {provide: AngularFireDatabase, useClass: FakeAngularFireDatabase}
       ]
     });
   });

@@ -2,8 +2,10 @@ import { FirebaseListObservable } from 'angularfire2/database';
 
 export class FakeAngularFireAuth {
   auth = {
-    signInWithEmailAndPassword(user: string, password: string): void { },
-    signOut(): void { }
+    signInWithEmailAndPassword(user: string, password: string): void {
+    },
+    signOut(): void {
+    }
   }
   authState = null;
 }

@@ -6,6 +6,7 @@ export class FakeCategoryService {
     const category = new Category(id, 'Selected Category', 'Lorem ipsum dolor sit amet');
     return new Observable(observer => observer.next(category));
   }
+
   getCategories(): Observable<Category[]> {
     const categories = [
       new Category('1', 'Category 1', 'lorem'),
@@ -14,16 +15,21 @@ export class FakeCategoryService {
     ];
     return new Observable(observer => observer.next(categories));
   }
+
   getFirstCategory() {
     const firstCategory = new Category('0', 'First category', 'sit');
     return new Observable(observer => observer.next(firstCategory));
   }
+
   addCategory(category: Category) {
   }
+
   editCategory(category: Category) {
   }
+
   deleteCategory(categoryId: string) {
   }
+
   deleteAllCategories() {
   }
 };

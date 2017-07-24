@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import {ActivatedRoute, ParamMap, Router} from '@angular/router';
+import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 
 import { ProductService } from '../../../product.service';
 import { CategoryService } from '../../../category.service';
@@ -9,7 +9,7 @@ import { Product } from '../../../product';
 
 import { Observable } from 'rxjs/Observable';
 import { Subscription } from 'rxjs/Subscription';
-import {FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-add-edit-product',
@@ -47,11 +47,13 @@ export class AddEditProductComponent implements OnInit, OnDestroy {
   lastProductIdSubscription$: Subscription;
   product: Product;
   categories$: Observable<Category[]>;
+
   constructor(private route: ActivatedRoute,
               private router: Router,
               private productService: ProductService,
               private categoryService: CategoryService,
-              private fb: FormBuilder) { }
+              private fb: FormBuilder) {
+  }
 
   ngOnInit() {
     this.productSubscription$ = this.route.paramMap.switchMap((params: ParamMap) => {
@@ -70,49 +72,60 @@ export class AddEditProductComponent implements OnInit, OnDestroy {
         this.product.imgUrl = `https://unsplash.it/320/180/?random&id=${lastProductId}`;
       }
       if (this.productForm) {
-        this.productForm.patchValue({ imgUrl: this.product.imgUrl });
+        this.productForm.patchValue({imgUrl: this.product.imgUrl});
       }
     });
   }
+
   ngOnDestroy() {
     this.productSubscription$.unsubscribe();
     this.lastProductIdSubscription$.unsubscribe();
   }
+
   buildForm(): void {
     this.productForm = this.fb.group({
-      title: [ this.product.title, Validators.required ],
-      promoted: [ this.product.promoted ],
-      price: [ this.product.price ],
-      amount: [ this.product.amount ],
-      imgUrl: [ this.product.imgUrl, Validators.required ],
-      category: [ this.product.category, Validators.required ],
-      description: [ this.product.description ]
+      title: [this.product.title, Validators.required],
+      promoted: [this.product.promoted],
+      price: [this.product.price],
+      amount: [this.product.amount],
+      imgUrl: [this.product.imgUrl, Validators.required],
+      category: [this.product.category, Validators.required],
+      description: [this.product.description]
     });
     this.productForm.valueChanges.subscribe(data => this.onValueChanged());
   }
+
   onValueChanged(): void {
-    if (!this.productForm) { return; }
+    if (!this.productForm) {
+      return;
+    }
 
     for (const field in this.formErrors) {
-      if (!this.formErrors.hasOwnProperty(field)) { continue; }
+      if (!this.formErrors.hasOwnProperty(field)) {
+        continue;
+      }
       this.formErrors[field] = '';
       const control = this.productForm.get(field);
 
       if (control && control.dirty && !control.valid) {
         const messages = this.validationMessages[field];
         for (const key in control.errors) {
-          if (!control.errors.hasOwnProperty(key)) { continue; }
+          if (!control.errors.hasOwnProperty(key)) {
+            continue;
+          }
           this.formErrors[field] += messages[key] + ' ';
         }
       }
     }
   }
+
   onAdd(): void {
     const product = this.productForm.value;
     product.id = this.product.id;
     this.productService.addProduct(product);
     this.redirectToDefault();
   }
+
   onEdit(): void {
     const product = this.productForm.value;
     product.id = this.product.id;
@@ -120,10 +133,12 @@ export class AddEditProductComponent implements OnInit, OnDestroy {
     this.productService.editProduct(product);
     this.redirectToDefault();
   }
+
   onDelete(id: string): void {
     this.productService.deleteProduct(id);
     this.redirectToDefault();
   }
+
   private redirectToDefault(): void {
     this.router.navigateByUrl('admin/products');
   }

@@ -10,7 +10,7 @@ describe('UserAuthService', () => {
     TestBed.configureTestingModule({
       providers: [
         UserAuthService,
-        { provide: CoolSessionStorage, useClass: FakeCoolSessionStorege }
+        {provide: CoolSessionStorage, useClass: FakeCoolSessionStorege}
       ]
     });
   });

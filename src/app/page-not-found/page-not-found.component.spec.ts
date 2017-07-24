@@ -11,12 +11,12 @@ describe('PageNotFoundComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ PageNotFoundComponent ],
+      declarations: [PageNotFoundComponent],
       providers: [
-        { provide: Router, useClass: RouterStub }
+        {provide: Router, useClass: RouterStub}
       ]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

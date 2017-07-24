@@ -10,8 +10,8 @@ describe('ProductService', () => {
     TestBed.configureTestingModule({
       providers: [
         ProductService,
-        { provide: AngularFireAuth, useClass: FakeAngularFireAuth },
-        { provide: AngularFireDatabase, useClass: FakeAngularFireDatabase }
+        {provide: AngularFireAuth, useClass: FakeAngularFireAuth},
+        {provide: AngularFireDatabase, useClass: FakeAngularFireDatabase}
       ]
     });
   });

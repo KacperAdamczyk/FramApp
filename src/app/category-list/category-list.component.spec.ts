@@ -12,13 +12,13 @@ describe('CategoryListComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ CategoryListComponent ],
+      declarations: [CategoryListComponent],
       providers: [
-        { provide: CategoryService, useClass: FakeCategoryService }
-        ],
-      schemas: [ NO_ERRORS_SCHEMA ]
+        {provide: CategoryService, useClass: FakeCategoryService}
+      ],
+      schemas: [NO_ERRORS_SCHEMA]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

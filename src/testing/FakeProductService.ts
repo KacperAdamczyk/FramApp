@@ -1,26 +1,47 @@
 import { Observable } from 'rxjs/Observable';
 import { Product } from '../app/product';
 
-export class FakeProductService {
-  private products = [
-    new Product('', 0, 'Product #1'),
-    new Product('', 1, 'Product #2'),
-    new Product('', 2, 'Product #3'),
-    new Product('', 3, 'Product #4'),
-    new Product('', 4, 'Product #5'),
-  ];
+export const mockedProducts = [
+  new Product('a', 0, 'Product #1', '', 'Category 1'),
+  new Product('b', 1, 'Product #2', '', 'Category 2'),
+  new Product('c', 2, 'Product #3', '', 'Category 1'),
+  new Product('d', 3, 'Product #4', '', 'Category 3'),
+  new Product('e', 4, 'Product #5', '', 'Category 1'),
+];
+export const mockedProductsServer = [
+  {$key: 'a', id: 0, title: 'Product #1', category: 'Category 1'},
+  {$key: 'b', id: 1, title: 'Product #2', category: 'Category 2'},
+  {$key: 'c', id: 2, title: 'Product #3', category: 'Category 1'},
+  {$key: 'd', id: 3, title: 'Product #4', category: 'Category 3'},
+  {$key: 'e', id: 4, title: 'Product #5', category: 'Category 1'},
+];
 
+export class FakeProductService {
   getProducts(category: string = ''): Observable<Product[]> {
-    return new Observable(observer => observer.next(this.products));
+    if (!category) {
+      return new Observable(subscriber => subscriber.next(mockedProducts));
+    }
+    const products = [];
+    mockedProducts.forEach(product => {
+      if (product.category === category) {
+        products.push(product);
+      }
+    });
+    return new Observable(subscriber => subscriber.next(products));
   }
 
   getProduct(id: string): Observable<Product> {
-    return new Observable(observer => observer.next(new Product(id, 666, 'Selected product')));
+    let product;
+    mockedProducts.forEach(p => {
+      if (p.id_real === id) {
+        product = p;
+      }
+    });
+    return new Observable(subscriber => subscriber.next(product));
   }
 
   getLastProductId(): Observable<number> {
-    const id = 123;
-    return new Observable(observer => observer.next(id));
+    return new Observable(subscriber => subscriber.next(mockedProducts[mockedProducts.length - 1].id));
   }
 
   addProduct(product: Product) {

@@ -64,6 +64,6 @@ describe('AppComponent', () => {
     app.userLoggedIn = true;
     fixture.detectChanges();
     const compiled = fixture.debugElement.nativeElement;
-    expect(compiled.querySelector('.pSignButton').textContent).toEqual('Log Out');
+    expect(compiled.querySelector('.pSignButton').textContent).toBe('Log Out');
   });
 });

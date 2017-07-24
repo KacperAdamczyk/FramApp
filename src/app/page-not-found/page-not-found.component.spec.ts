@@ -28,4 +28,8 @@ describe('PageNotFoundComponent', () => {
   it('should be created', () => {
     expect(component).toBeTruthy();
   });
+
+  it('should display an image', () => {
+    expect(fixture.debugElement.nativeElement.querySelector('img')).toBeTruthy();
+  });
 });

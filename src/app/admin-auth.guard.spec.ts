@@ -15,7 +15,11 @@ describe('AdminAuthGuard', () => {
     });
   });
 
-  it('should ...', inject([AdminAuthGuard], (guard: AdminAuthGuard) => {
+  it('should be truthy', inject([AdminAuthGuard], (guard: AdminAuthGuard) => {
     expect(guard).toBeTruthy();
+  }));
+
+  it('should work', inject([AdminAuthGuard], (guard: AdminAuthGuard) => {
+    expect(guard.canActivate(null, null)).toBeTruthy();
   }));
 });

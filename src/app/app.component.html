@@ -3,9 +3,7 @@
     <div class="navbar-header"><h1><a routerLink="/"> {{title}} </a></h1></div>
   </div>
   <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
-    <button type="button" class="btn btn-large pull-right pSignButton" (click)="onUserButtonClick()">{{userLoggedIn?
-      userLoggedInLabel : userLoggedOutLabel}}
-    </button>
+    <button type="button" class="btn btn-large pull-right pSignButton" (click)="onUserButtonClick()">{{userLoggedIn? userLoggedInLabel : userLoggedOutLabel}}</button>
   </div>
 </nav>
 
@@ -23,8 +21,8 @@
       <div class="navbar-header">
         <h1>
           <a href="#"> {{title}} </a>
-          <button type="button" class="btn btn-large pull-right pSignButton pSignButtonMobile"
-                  (click)="onUserButtonClick()">{{userLoggedIn? userLoggedInLabel : userLoggedOutLabel}}
+          <button type="button" class="btn btn-large pull-right pSignButton pSignButtonMobile" (click)="onUserButtonClick()">
+            {{userLoggedIn? userLoggedInLabel : userLoggedOutLabel}}
           </button>
         </h1>
       </div>

@@ -18,4 +18,8 @@ describe('UserAuthService', () => {
   it('should be created', inject([UserAuthService], (service: UserAuthService) => {
     expect(service).toBeTruthy();
   }));
+
+  it('user should be logged in', inject([UserAuthService], (service: UserAuthService) => {
+    service.isUserAuth().subscribe(value => expect(value).toBeTruthy());
+  }));
 });

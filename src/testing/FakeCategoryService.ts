@@ -1,24 +1,32 @@
 import { Observable } from 'rxjs/Observable';
 import { Category } from '../app/category';
 
+export const mockedCategories = [
+  new Category('x', 'Category 1', 'lorem'),
+  new Category('y', 'Category 2', 'ipsum'),
+  new Category('z', 'Category 3', 'dolor')
+];
+export const mockedCategoriesServer = [
+  {$key: 'x', title: 'Category 1', description: 'lorem'},
+  {$key: 'y', title: 'Category 2', description: 'ipsum'},
+  {$key: 'z', title: 'Category 3', description: 'dolor'},
+];
+
+export const mockedCategory = new Category('000', 'Selected Category', 'Lorem ipsum dolor sit amet');
+
+export const mockedFirstCategory = new Category('0', 'First category', 'sit');
+
 export class FakeCategoryService {
   getCategory(id: string): Observable<Category> {
-    const category = new Category(id, 'Selected Category', 'Lorem ipsum dolor sit amet');
-    return new Observable(observer => observer.next(category));
+    return new Observable(observer => observer.next(mockedCategory));
   }
 
   getCategories(): Observable<Category[]> {
-    const categories = [
-      new Category('1', 'Category 1', 'lorem'),
-      new Category('2', 'Category 2', 'ipsum'),
-      new Category('3', 'Category 3', 'dolor')
-    ];
-    return new Observable(observer => observer.next(categories));
+    return new Observable(observer => observer.next(mockedCategories));
   }
 
   getFirstCategory() {
-    const firstCategory = new Category('0', 'First category', 'sit');
-    return new Observable(observer => observer.next(firstCategory));
+    return new Observable(observer => observer.next(mockedFirstCategory));
   }
 
   addCategory(category: Category) {
@@ -32,4 +40,4 @@ export class FakeCategoryService {
 
   deleteAllCategories() {
   }
-};
+}

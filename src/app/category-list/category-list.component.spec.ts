@@ -39,4 +39,8 @@ describe('CategoryListComponent', () => {
     component.categories$.subscribe(value =>
       expect(fixture.debugElement.nativeElement.querySelectorAll('li').length).toEqual(value.length));
   });
+
+  // it ('should all categories redirect to proper component', () => {
+  //
+  // })
 });

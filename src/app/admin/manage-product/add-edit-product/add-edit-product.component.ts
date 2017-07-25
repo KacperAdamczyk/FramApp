@@ -10,6 +10,7 @@ import { Product } from '../../../product';
 import { Observable } from 'rxjs/Observable';
 import { Subscription } from 'rxjs/Subscription';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { of } from 'rxjs/observable/of';
 
 @Component({
   selector: 'app-add-edit-product',
@@ -45,7 +46,6 @@ export class AddEditProductComponent implements OnInit, OnDestroy {
   };
   productSubscription$: Subscription;
   lastProductIdSubscription$: Subscription;
-  product: Product;
   categories$: Observable<Category[]>;
 
   constructor(private route: ActivatedRoute,
@@ -59,20 +59,14 @@ export class AddEditProductComponent implements OnInit, OnDestroy {
     this.productSubscription$ = this.route.paramMap.switchMap((params: ParamMap) => {
       const paramName = 'id';
       const id = params.get(paramName);
-      return id ? this.productService.getProduct(id) : new Observable(subscriber => subscriber.next(new Product()));
-    }).subscribe(product => {
-      this.product = <Product>product;
-      this.buildForm();
-    });
+      return id ? this.productService.getProduct(id) : of(new Product());
+    }).subscribe(product => this.buildForm(product));
     this.categories$ = this.categoryService.getCategories();
     this.lastProductIdSubscription$ = this.productService.getLastProductId().subscribe(productId => {
       const lastProductId = productId + 1;
-      if (this.product) {
-        this.product.id = lastProductId;
-        this.product.imgUrl = `https://unsplash.it/320/180/?random&id=${lastProductId}`;
-      }
-      if (this.productForm) {
-        this.productForm.patchValue({imgUrl: this.product.imgUrl});
+      if (this.productForm && this.productForm.get('id_real')) {
+        this.productForm.patchValue({id: lastProductId});
+        this.productForm.patchValue({imgUrl: `https://unsplash.it/320/180/?random&id=${lastProductId}`});
       }
     });
   }
@@ -82,15 +76,17 @@ export class AddEditProductComponent implements OnInit, OnDestroy {
     this.lastProductIdSubscription$.unsubscribe();
   }
 
-  buildForm(): void {
+  buildForm(product): void {
     this.productForm = this.fb.group({
-      title: [this.product.title, Validators.required],
-      promoted: [this.product.promoted],
-      price: [this.product.price],
-      amount: [this.product.amount],
-      imgUrl: [this.product.imgUrl, Validators.required],
-      category: [this.product.category, Validators.required],
-      description: [this.product.description]
+      id: [product.id],
+      id_real: [product.id_real],
+      title: [product.title, Validators.required],
+      promoted: [product.promoted],
+      price: [product.price],
+      amount: [product.amount],
+      imgUrl: [product.imgUrl, Validators.required],
+      category: [product.category, Validators.required],
+      description: [product.description]
     });
     this.productForm.valueChanges.subscribe(data => this.onValueChanged());
   }
@@ -120,16 +116,15 @@ export class AddEditProductComponent implements OnInit, OnDestroy {
   }
 
   onAdd(): void {
+    console.log('add call');
     const product = this.productForm.value;
-    product.id = this.product.id;
     this.productService.addProduct(product);
     this.redirectToDefault();
   }
 
   onEdit(): void {
+    console.log('edit call');
     const product = this.productForm.value;
-    product.id = this.product.id;
-    product.id_real = this.product.id_real;
     this.productService.editProduct(product);
     this.redirectToDefault();
   }

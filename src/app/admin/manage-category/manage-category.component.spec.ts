@@ -9,12 +9,14 @@ import { FakeCategoryService, mockedCategories } from '../../../testing/FakeCate
 describe('ManageCategoryComponent', () => {
   let component: ManageCategoryComponent;
   let fixture: ComponentFixture<ManageCategoryComponent>;
+  let fakeCategoryService: FakeCategoryService;
 
   beforeEach(async(() => {
+    fakeCategoryService = new FakeCategoryService();
     TestBed.configureTestingModule({
       declarations: [ManageCategoryComponent],
       providers: [
-        {provide: CategoryService, useClass: FakeCategoryService}
+        {provide: CategoryService, useValue: fakeCategoryService}
       ],
       schemas: [NO_ERRORS_SCHEMA]
     })
@@ -38,5 +40,16 @@ describe('ManageCategoryComponent', () => {
   it('should display all categories', () => {
     component.categories$.subscribe(value =>
       expect(fixture.debugElement.nativeElement.querySelectorAll('table tbody tr').length).toEqual(value.length))
+  });
+
+  it('all delete buttons should receive proper parameter', () => {
+    spyOn(fakeCategoryService, 'deleteCategory');
+    let categoryIndex = 0;
+    fixture.debugElement.nativeElement.querySelectorAll('a').forEach(b => {
+      if (b.textContent === 'Delete') {
+        b.click();
+        expect(fakeCategoryService.deleteCategory).toHaveBeenCalledWith(mockedCategories[categoryIndex++].id);
+      }
+    });
   });
 });

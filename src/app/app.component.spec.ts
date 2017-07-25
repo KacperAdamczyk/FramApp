@@ -61,7 +61,7 @@ describe('AppComponent', () => {
   it('user should now be logged in', () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.debugElement.componentInstance;
-    app.userLoggedIn = true;
+    fixture.debugElement.nativeElement.querySelector('button').click();
     fixture.detectChanges();
     const compiled = fixture.debugElement.nativeElement;
     expect(compiled.querySelector('.pSignButton').textContent).toBe('Log Out');

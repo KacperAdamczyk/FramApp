@@ -1,8 +1,8 @@
-<ng-container *ngIf="category">
+<ng-container *ngIf="categoryForm">
   <header>
-    <h2>{{ category.id ? 'Edit ' + category.title : 'Add category' }}</h2>
+    <h2>{{ categoryForm.get('id').value ? 'Edit ' + categoryForm.get('title').value : 'Add category' }}</h2>
   </header>
-  <form class="pAppForm" [formGroup]="categoryForm" (ngSubmit)="category.id ? onEdit() : onAdd()">
+  <form class="pAppForm" [formGroup]="categoryForm" (ngSubmit)="categoryForm.get('id').value ? onEdit() : onAdd()">
 
     <div class="form-group">
       <label for="title">Title</label>
@@ -16,8 +16,7 @@
       <div *ngIf="formErrors.description" class="alert alert-danger">{{ formErrors.description }}</div>
     </div>
 
-    <button class="btn btn-large pSubmitButton" [disabled]="!categoryForm.valid">{{ category.id ? 'Save' : 'Add' }}
-    </button>
-    <button class="btn btn-large pSubmitButton" *ngIf="category.id" (click)="onDelete(category.id)">Delete</button>
+    <button class="btn btn-large pSubmitButton" [disabled]="!categoryForm.valid">{{ categoryForm.get('id').value ? 'Save' : 'Add' }}</button>
+    <button type="button" class="btn btn-large pSubmitButton" *ngIf="categoryForm.get('id').value" (click)="onDelete(categoryForm.get('id').value)">Delete</button>
   </form>
 </ng-container>

@@ -2,12 +2,12 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 
 import { Category } from '../../../category'
-import { Observable } from 'rxjs/Observable';
 
 import { CategoryService } from '../../../category.service';
 
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Subscription } from 'rxjs/Subscription';
+import { of } from 'rxjs/observable/of';
 
 @Component({
   selector: 'app-add-edit-category',
@@ -26,7 +26,6 @@ export class AddEditCategoryComponent implements OnInit, OnDestroy {
     }
   };
   categorySubscription$: Subscription;
-  category: Category;
 
   constructor(private route: ActivatedRoute,
               private router: Router,
@@ -38,21 +37,19 @@ export class AddEditCategoryComponent implements OnInit, OnDestroy {
     this.categorySubscription$ = this.route.paramMap.switchMap((params: ParamMap) => {
       const paramName = 'id';
       const id = params.get(paramName);
-      return id ? this.categoryService.getCategory(id) : new Observable(subscriber => subscriber.next(new Category()));
-    }).subscribe(category => {
-      this.category = <Category>category;
-      this.buildForm();
-    });
+      return id ? this.categoryService.getCategory(id) : of(new Category());
+    }).subscribe(category => this.buildForm(category));
   }
 
   ngOnDestroy() {
     this.categorySubscription$.unsubscribe();
   }
 
-  buildForm(): void {
+  buildForm(category): void {
     this.categoryForm = this.fb.group({
-      title: [this.category.title, Validators.required],
-      description: [this.category.description]
+      id: [category.id],
+      title: [category.title, Validators.required],
+      description: [category.description]
     });
     this.categoryForm.valueChanges.subscribe(data => this.onValueChanged());
   }
@@ -82,13 +79,14 @@ export class AddEditCategoryComponent implements OnInit, OnDestroy {
   }
 
   onAdd(): void {
-    this.categoryService.addCategory(this.categoryForm.value);
+    console.log('add');
+    this.categoryService.addCategory(this.categoryForm.getRawValue());
     this.redirectToDefault();
   }
 
   onEdit(): void {
-    const category = this.categoryForm.value;
-    category.id = this.category.id;
+    console.log('eidt');
+    const category = this.categoryForm.getRawValue();
     this.categoryService.editCategory(category);
     this.redirectToDefault();
   }

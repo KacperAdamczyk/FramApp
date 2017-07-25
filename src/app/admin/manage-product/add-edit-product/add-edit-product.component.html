@@ -1,8 +1,8 @@
-<ng-container *ngIf="product">
+<ng-container *ngIf="productForm">
   <header>
-    <h2>{{ product.id_real ? 'Edit ' + product.title : 'Add category' }}</h2>
+    <h2>{{ productForm.get('id_real').value ? 'Edit ' + productForm.get('title').value : 'Add category' }}</h2>
   </header>
-  <form class="pAppForm" [formGroup]="productForm" (ngSubmit)="product.id_real ? onEdit() : onAdd()">
+  <form class="pAppForm" [formGroup]="productForm" (ngSubmit)="productForm.get('id_real').value ? onEdit() : onAdd()">
 
     <div class="form-group">
       <label for="title">Title</label>
@@ -17,7 +17,7 @@
 
     <div class="form-group">
       <label for="price">Price</label>
-      <input id="price" class="form-control" formControlName="price" required/>
+      <input id="price" class="form-control" formControlName="price"/>
       <div *ngIf="formErrors.price" class="alert alert-danger">{{ formErrors.price }}</div>
     </div>
 
@@ -47,9 +47,7 @@
       <div *ngIf="formErrors.description" class="alert alert-danger">{{ formErrors.description }}</div>
     </div>
 
-    <button class="btn btn-large pSubmitButton" [disabled]="!productForm.valid">{{ product.id_real ? 'Save' : 'Add' }}
-    </button>
-    <button class="btn btn-large pSubmitButton" *ngIf="product.id_real" (click)="onDelete(product.id_real)">Delete
-    </button>
+    <button class="btn btn-large pSubmitButton" [disabled]="!productForm.valid">{{ productForm.get('id_real').value ? 'Save' : 'Add' }}</button>
+    <button class="btn btn-large pSubmitButton" type="button" *ngIf="productForm.get('id_real').value" (click)="onDelete(productForm.get('id_real').value)">Delete</button>
   </form>
 </ng-container>

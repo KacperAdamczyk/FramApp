@@ -6,7 +6,6 @@ import { ProductDetailsComponent } from './product-details/product-details.compo
 
 import { ProductListRoutingModule } from './product-routing.module';
 
-//import { CategoryService } from '../category.service';
 import { ProductService } from '../product.service';
 
 @NgModule({
@@ -20,7 +19,6 @@ import { ProductService } from '../product.service';
   ],
   exports: [],
   providers: [
-    //CategoryService,
     ProductService
   ]
 })

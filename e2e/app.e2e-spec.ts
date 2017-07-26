@@ -1,4 +1,5 @@
 import { FramappPage } from './app.po';
+import { browser } from 'protractor';
 
 describe('framapp App', () => {
   let page: FramappPage;
@@ -8,7 +9,8 @@ describe('framapp App', () => {
   });
 
   it('should display welcome message', () => {
+    browser.waitForAngularEnabled(false);
     page.navigateTo();
-    // expect(page.getParagraphText()).toEqual('Welcome to app!!');
+    expect(page.getParagraphText()).toEqual('FramApp');
   });
 });

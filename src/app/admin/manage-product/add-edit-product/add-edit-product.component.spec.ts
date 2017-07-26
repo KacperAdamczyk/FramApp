@@ -61,7 +61,7 @@ describe('AddEditProductComponent', () => {
     });
   });
 
-  xit('submitted form should return proper values', () => {
+  fit('submitted form should return proper values', () => {
     const productToSet = mockedProducts[Math.floor(Math.random() * (mockedProducts.length - 1))];
     component.productForm.setValue(productToSet);
     spyOn(fakeProductService, 'editProduct');

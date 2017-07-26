@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 
 import { Category } from '../../../category'
@@ -6,16 +6,16 @@ import { Category } from '../../../category'
 import { CategoryService } from '../../../category.service';
 
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Subscription } from 'rxjs/Subscription';
 import { of } from 'rxjs/observable/of';
+import { Observable } from 'rxjs/Observable';
 
 @Component({
   selector: 'app-add-edit-category',
   templateUrl: './add-edit-category.component.html',
   styleUrls: ['./add-edit-category.component.scss']
 })
-export class AddEditCategoryComponent implements OnInit, OnDestroy {
-  categoryForm: FormGroup;
+export class AddEditCategoryComponent implements OnInit {
+  categoryForm$: Observable<FormGroup>;
   formErrors = {
     title: '',
     description: ''
@@ -25,7 +25,6 @@ export class AddEditCategoryComponent implements OnInit, OnDestroy {
       required: 'Title is required.',
     }
   };
-  categorySubscription$: Subscription;
 
   constructor(private route: ActivatedRoute,
               private router: Router,
@@ -34,28 +33,27 @@ export class AddEditCategoryComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.categorySubscription$ = this.route.paramMap.switchMap((params: ParamMap) => {
+    this.categoryForm$ = this.route.paramMap.switchMap((params: ParamMap) => {
       const paramName = 'id';
       const id = params.get(paramName);
       return id ? this.categoryService.getCategory(id) : of(new Category());
-    }).subscribe(category => this.buildForm(category));
+    }).map(category => this.buildForm(category));
   }
 
-  ngOnDestroy() {
-    this.categorySubscription$.unsubscribe();
-  }
-
-  buildForm(category): void {
-    this.categoryForm = this.fb.group({
+  buildForm(category: Category): FormGroup {
+    const form = this.fb.group({
       id: [category.id],
       title: [category.title, Validators.required],
       description: [category.description]
     });
-    this.categoryForm.valueChanges.subscribe(data => this.onValueChanged());
+
+    form.valueChanges.subscribe(data => this.onValueChanged(form));
+
+    return form;
   }
 
-  onValueChanged(): void {
-    if (!this.categoryForm) {
+  onValueChanged(form: FormGroup): void {
+    if (!form) {
       return;
     }
 
@@ -64,7 +62,7 @@ export class AddEditCategoryComponent implements OnInit, OnDestroy {
         continue;
       }
       this.formErrors[field] = '';
-      const control = this.categoryForm.get(field);
+      const control = form.get(field);
 
       if (control && control.dirty && !control.valid) {
         const messages = this.validationMessages[field];
@@ -73,20 +71,19 @@ export class AddEditCategoryComponent implements OnInit, OnDestroy {
             continue;
           }
           this.formErrors[field] += messages[key] + ' ';
+          console.log(this.formErrors);
         }
       }
     }
   }
 
-  onAdd(): void {
-    console.log('add');
-    this.categoryService.addCategory(this.categoryForm.getRawValue());
+  onAdd(form: FormGroup): void {
+    this.categoryService.addCategory(form.getRawValue());
     this.redirectToDefault();
   }
 
-  onEdit(): void {
-    console.log('eidt');
-    const category = this.categoryForm.getRawValue();
+  onEdit(form: FormGroup): void {
+    const category = form.getRawValue();
     this.categoryService.editCategory(category);
     this.redirectToDefault();
   }

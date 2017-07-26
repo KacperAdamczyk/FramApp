@@ -1,8 +1,8 @@
-<ng-container *ngIf="productForm">
+<ng-container *ngIf="(productForm$ | async) as form">
   <header>
-    <h2>{{ productForm.get('id_real').value ? 'Edit ' + productForm.get('title').value : 'Add category' }}</h2>
+    <h2>{{ form.get('id_real').value ? 'Edit ' + form.get('title').value : 'Add product' }}</h2>
   </header>
-  <form class="pAppForm" [formGroup]="productForm" (ngSubmit)="productForm.get('id_real').value ? onEdit() : onAdd()">
+  <form class="pAppForm" [formGroup]="form" (ngSubmit)="form.get('id_real').value ? onEdit(form) : onAdd(form)" (mousemove)="fillAsyncData(form)">
 
     <div class="form-group">
       <label for="title">Title</label>
@@ -47,7 +47,7 @@
       <div *ngIf="formErrors.description" class="alert alert-danger">{{ formErrors.description }}</div>
     </div>
 
-    <button class="btn btn-large pSubmitButton" [disabled]="!productForm.valid">{{ productForm.get('id_real').value ? 'Save' : 'Add' }}</button>
-    <button class="btn btn-large pSubmitButton" type="button" *ngIf="productForm.get('id_real').value" (click)="onDelete(productForm.get('id_real').value)">Delete</button>
+    <button class="btn btn-large pSubmitButton" [disabled]="!form.valid">{{ form.get('id_real').value ? 'Save' : 'Add' }}</button>
+    <button class="btn btn-large pSubmitButton" type="button" *ngIf="form.get('id_real').value" (click)="onDelete(form.get('id_real').value)">Delete</button>
   </form>
 </ng-container>

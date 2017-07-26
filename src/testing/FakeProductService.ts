@@ -2,11 +2,11 @@ import { Observable } from 'rxjs/Observable';
 import { Product } from '../app/product';
 
 export const mockedProducts = [
-  new Product('a', 0, 'Product #1', '', 'Category 1'),
-  new Product('b', 1, 'Product #2', '', 'Category 2'),
-  new Product('c', 2, 'Product #3', '', 'Category 1'),
-  new Product('d', 3, 'Product #4', '', 'Category 3'),
-  new Product('e', 4, 'Product #5', '', 'Category 1'),
+  new Product('a', 0, 'Product #1', '', 'Category 1', 'url 1'),
+  new Product('b', 1, 'Product #2', '', 'Category 2', 'url 2'),
+  new Product('c', 2, 'Product #3', '', 'Category 1', 'url 3'),
+  new Product('d', 3, 'Product #4', '', 'Category 3', 'url 4'),
+  new Product('e', 4, 'Product #5', '', 'Category 1', 'url 5'),
 ];
 export const mockedProductsServer = [
   {$key: 'a', id: 0, title: 'Product #1', category: 'Category 1'},

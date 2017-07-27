@@ -1,0 +1,10 @@
+$blackColor: #423C3C;
+$blueColor: #337ab7;
+$bgColor: #f3f3f3;
+$whiteFont: #f3f3f3;
+$imageWidth: 320px;
+$borderColor: #bbb;
+
+@mixin tableBorder($borderColor) {
+  border: 1px solid $borderColor;
+}

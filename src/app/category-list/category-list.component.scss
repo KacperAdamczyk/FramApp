@@ -1,0 +1,40 @@
+@import "../../shared/styles/variables";
+@import '../../shared/styles/res';
+
+li {
+  margin-left: 15px;
+  &:first-of-type {
+    margin-top: 20px;
+  }
+  a {
+    font-size: 1.2em;
+    letter-spacing: 1px;
+    cursor: pointer;
+    font-weight: 300;
+    color: $whiteFont;
+    &:hover {
+      text-decoration: none;
+      color: $blueColor;
+    }
+    &:focus {
+      text-decoration: none;
+      color: $blueColor;
+    }
+    &:active {
+      color: darken($blueColor, 10%);
+    }
+  }
+}
+
+@media only screen and (max-width: 767px) {
+  li {
+    margin-left: 0;
+    &:first-of-type {
+      margin-top: 10px;
+    }
+    a {
+      font-size: 0.8em;
+      text-align: center;
+    }
+  }
+}

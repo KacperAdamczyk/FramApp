@@ -1,0 +1,113 @@
+@import "../shared/styles/variables";
+@import "../shared/styles/res";
+
+.pNav {
+  background-color: $blackColor;
+  margin-bottom: 0;
+  border-radius: 0;
+  border-bottom: 1px solid $blueColor;
+  h1 {
+    margin-left: 15px;
+    color: $blueColor;
+    line-height: 50px;
+  }
+}
+
+ul {
+  list-style-type: none;
+  margin: 50px 0 0 15px;
+  font-size: 1.2em;
+  letter-spacing: 2px;
+}
+
+.pSignButton {
+  width: 100px;
+  height: 32px;
+  margin: 9px 15px 0 0;
+  background-color: $blueColor;
+  border: none;
+  color: $whiteFont;
+  &:hover {
+    background-color: darken($blueColor, 10%);
+    color: $whiteFont;
+  }
+  &:focus {
+    color: $whiteFont;
+    outline: none;
+  }
+  &:active {
+    color: $whiteFont;
+    outline: none !important;
+    box-shadow: none;
+  }
+  &Mobile {
+    width: 80px;
+    margin-right: 20px;
+    font-family: 'Roboto', sans-serif;
+  }
+}
+
+.pMenu {
+  height: calc(100vh - 51px);
+  background-color: #322C2C;
+  color: $blueColor;
+  font-weight: bold;
+  li {
+    font-style: normal;
+  }
+}
+
+.pMenuAdmin {
+  margin-top: 70px;
+}
+
+.pContainer {
+  padding-top: 15px;
+  height: calc(100vh - 51px);
+  overflow-y: auto;
+}
+
+.showOnMobile {
+  display: none;
+}
+
+.hideOnMobile {
+  display: block;
+}
+
+@media only screen and (max-width: 767px) {
+  .showOnMobile {
+    display: block;
+  }
+  .hideOnMobile {
+    display: none;
+  }
+  .pMenu {
+    display: none;
+  }
+  .pMenuMobile {
+    height: 100%;
+    background-color: #322C2C;
+    color: $blueColor;
+    border-top: 1px solid $blueColor;
+    margin: 0 -15px !important;
+    li {
+      font-weight: normal;
+      ul {
+        margin: 20px 0 0 0;
+        padding-bottom: 10px;
+        text-align: center;
+        font-weight: bold;
+        font-size: 1.3em;
+        li {
+          margin-left: 0;
+          a {
+            font-size: 0.8em;;
+            font-weight: 300;
+            text-align: center;
+          }
+        }
+      }
+    }
+  }
+}

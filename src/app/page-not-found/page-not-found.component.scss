@@ -1,0 +1,18 @@
+p {
+  font-size: 30px;
+}
+
+div {
+  width: 600px;
+  margin: auto;
+  position: relative;
+  img {
+    width: 100%;
+  }
+}
+
+@media only screen and (max-width: 767px) {
+  div {
+    width: 100%;
+  }
+}

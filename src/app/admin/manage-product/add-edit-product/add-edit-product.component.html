@@ -1,0 +1,53 @@
+<ng-container *ngIf="(productForm$ | async) as form">
+  <header>
+    <h2>{{ form.get('id_real').value ? 'Edit ' + form.get('title').value : 'Add product' }}</h2>
+  </header>
+  <form class="pAppForm" [formGroup]="form" (ngSubmit)="form.get('id_real').value ? onEdit(form) : onAdd(form)" (mousemove)="fillAsyncData(form)">
+
+    <div class="form-group">
+      <label for="title">Title</label>
+      <input id="title" class="form-control" formControlName="title" required/>
+      <div *ngIf="formErrors.title" class="alert alert-danger">{{ formErrors.title }}</div>
+    </div>
+
+    <div class="form-group">
+      <label for="promoted">Promoted</label>
+      <input id="promoted" type="checkbox" formControlName="promoted"/>
+    </div>
+
+    <div class="form-group">
+      <label for="price">Price</label>
+      <input id="price" class="form-control" formControlName="price"/>
+      <div *ngIf="formErrors.price" class="alert alert-danger">{{ formErrors.price }}</div>
+    </div>
+
+    <div class="form-group">
+      <label for="amount">Amount</label>
+      <input id="amount" class="form-control" formControlName="amount"/>
+      <div *ngIf="formErrors.amount" class="alert alert-danger">{{ formErrors.amount }}</div>
+    </div>
+
+    <div class="form-group">
+      <label for="imgUrl">Image url</label>
+      <input id="imgUrl" class="form-control" formControlName="imgUrl" required/>
+      <div *ngIf="formErrors.imgUrl" class="alert alert-danger">{{ formErrors.imgUrl }}</div>
+    </div>
+
+    <div class="form-group">
+      <label for="category">Category:</label><br/>
+      <select id="category" class="form-control" formControlName="category" required>
+        <option *ngFor="let category of categories$ | async" [value]="category.title">{{category.title}}</option>
+      </select>
+      <div *ngIf="formErrors.category" class="alert alert-danger">{{ formErrors.category }}</div>
+    </div>
+
+    <div class="form-group">
+      <label for="description">Description</label>
+      <textarea id="description" class="form-control" formControlName="description"></textarea>
+      <div *ngIf="formErrors.description" class="alert alert-danger">{{ formErrors.description }}</div>
+    </div>
+
+    <button class="btn btn-large pSubmitButton" [disabled]="!form.valid">{{ form.get('id_real').value ? 'Save' : 'Add' }}</button>
+    <button class="btn btn-large pSubmitButton" type="button" *ngIf="form.get('id_real').value" (click)="onDelete(form.get('id_real').value)">Delete</button>
+  </form>
+</ng-container>

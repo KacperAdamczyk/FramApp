@@ -2,7 +2,7 @@
   <header>
     <h2>{{ form.get('id_real').value ? 'Edit ' + form.get('title').value : 'Add product' }}</h2>
   </header>
-  <form class="pAppForm" [formGroup]="form" (ngSubmit)="form.get('id_real').value ? onEdit(form) : onAdd(form)" (mousemove)="fillAsyncData(form)">
+  <form class="pAppForm" [formGroup]="form" (ngSubmit)="form.get('id_real').value ? onEdit(form) : onAdd(form)">
 
     <div class="form-group">
       <label for="title">Title</label>

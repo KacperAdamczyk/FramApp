@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, OnDestroy } from '@angular/core';
 
 import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
 import { AngularFireAuth } from 'angularfire2/auth';
@@ -10,7 +10,7 @@ import { email, password } from './firebaseConfig'
 import { Category } from './category'
 
 @Injectable()
-export class CategoryService {
+export class CategoryService implements OnDestroy {
   user: Observable<firebase.User>;
   categories$: FirebaseListObservable<Category[]>;
 
@@ -18,6 +18,10 @@ export class CategoryService {
     this.login();
     this.categories$ = af.list('/categories');
     this.user = this.afAuth.authState;
+  }
+
+  ngOnDestroy() {
+    this.logout();
   }
 
   login() {

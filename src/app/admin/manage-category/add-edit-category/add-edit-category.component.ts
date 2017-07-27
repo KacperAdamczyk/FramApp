@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 
 import { Category } from '../../../category'
@@ -8,14 +8,16 @@ import { CategoryService } from '../../../category.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { of } from 'rxjs/observable/of';
 import { Observable } from 'rxjs/Observable';
+import { Subscription } from 'rxjs/Subscription';
 
 @Component({
   selector: 'app-add-edit-category',
   templateUrl: './add-edit-category.component.html',
   styleUrls: ['./add-edit-category.component.scss']
 })
-export class AddEditCategoryComponent implements OnInit {
+export class AddEditCategoryComponent implements OnInit, OnDestroy {
   categoryForm$: Observable<FormGroup>;
+  formValueChangesSubscription: Subscription;
   formErrors = {
     title: '',
     description: ''
@@ -40,6 +42,10 @@ export class AddEditCategoryComponent implements OnInit {
     }).map(category => this.buildForm(category));
   }
 
+  ngOnDestroy() {
+    this.formValueChangesSubscription.unsubscribe();
+  }
+
   buildForm(category: Category): FormGroup {
     const form = this.fb.group({
       id: [category.id],
@@ -47,7 +53,7 @@ export class AddEditCategoryComponent implements OnInit {
       description: [category.description]
     });
 
-    form.valueChanges.subscribe(data => this.onValueChanged(form));
+    this.formValueChangesSubscription = form.valueChanges.subscribe(data => this.onValueChanged(form));
 
     return form;
   }

@@ -1,8 +1,12 @@
 import { browser, by, element } from 'protractor';
 
 export class FramappPage {
-  navigateTo() {
-    return browser.get('/products/Telephones');
+  constructor() {
+    browser.waitForAngularEnabled(false);
+  }
+
+  navigateToRoot() {
+    return browser.get('/');
   }
 
   getParagraphText() {

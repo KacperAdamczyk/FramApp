@@ -1,6 +1,6 @@
 import 'rxjs/add/operator/first';
 
-import { Injectable } from '@angular/core';
+import { Injectable, OnDestroy } from '@angular/core';
 
 import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
 import { AngularFireAuth } from 'angularfire2/auth';
@@ -13,7 +13,7 @@ import { Product } from './product'
 
 
 @Injectable()
-export class ProductService {
+export class ProductService implements OnDestroy {
   user$: Observable<firebase.User>;
   products$: FirebaseListObservable<Product[]>;
 
@@ -21,6 +21,10 @@ export class ProductService {
     this.login();
     this.products$ = af.list('/products');
     this.user$ = this.afAuth.authState;
+  }
+
+  ngOnDestroy() {
+    this.logout();
   }
 
   login() {
@@ -49,13 +53,7 @@ export class ProductService {
   }
 
   getLastProductId(): Observable<number> {
-    return this.products$.map(products => {
-      let maxId = -1;
-      products.map(product => {
-        maxId = product.id > maxId ? product.id : maxId;
-      });
-      return maxId;
-    });
+    return this.products$.map(products => Math.max(-1, ...products.map(p => p.id)));
   }
 
   addProduct(product: Product) {
